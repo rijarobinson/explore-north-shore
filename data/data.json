@@ -1,0 +1,29 @@
+[
+    {
+    locationName: 'Winnetka Thrift Shop',
+    streetAddress: '500 Green Bay Road',
+    city: 'Winnetka',
+    state: 'IL',
+    comment: 'Great place to get high end items on the cheap.',
+    imgSrc: 'http://www.placekitten.com/600/300',
+    imgAttribution: 'http://www.placekitten.com',
+    },
+    {
+    locationName: 'Forestway Drive',
+    streetAddress: 'Dundee Road and Forestway Drive',
+    city: 'Glencoe',
+    state: 'IL',
+    comment: 'Lovely drive featuring Skokie Lagoons.',
+    imgSrc: 'http://www.placekitten.com/500/250',
+    imgAttribution: 'http://www.placekitten.com',
+    },
+    {
+    locationName: 'Arriva Dolce',
+    streetAddress: '1823 St Johns Ave',
+    city: 'Highland Park',
+    state: 'IL',
+    comment: 'Great breakfast & lunch sandwiches, gelato, and baked goods. Oh, and coffee!',
+    imgSrc: 'http://www.placekitten.com/200/100',
+    imgAttribution: 'http://www.placekitten.com',
+    },
+]

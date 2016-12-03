@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Explore North Shore</title>
+</head>
+<body>
+
+<div="container">
+
+<div="row">
+<div="col-md-12">
+<h1>Explore the North Shore!</h1>
+</div>
+<div="row">
+<div="col-md-12">
+<h6>My favorite places to go on Chicago's North Shore</h3>
+</div>
+</div>
+</div>
+
+
+<div="row">
+<div="col-md-12">
+
+    <div id="location-list" data-bind="foreach: locationList">
+    <div id="location-address" class="h5" data-bind="text: fullAddress"></div>
+<!--         <hr>
+ -->    </div>
+
+
+</div>
+</div>
+
+
+<div="row">
+<div="col-md-12">
+
+
+    <div id="map" style="height: 400px; width: 100%;">Map not available-check address of site or internet connection.</div>
+</div>
+</div>
+</div>
+
+    <script src="js/map.js" async defer></script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlGZ5rJOgFVxkz8biOVu0Ni6LmVyEddQ&callback=initMap">
+    </script>
+
+    <script src="js/lib/knockout-3.4.1.js"></script>
+    <script src="js/app.js"></script>
+
+
+
+</body>
+</html>
+
