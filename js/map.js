@@ -7,6 +7,14 @@
                       center: center
                       });
 
+/*re-center on north shore when moved/resized courtesy of http://hsmoore.com/keep-google-map-v3-centered-when-browser-is-resized/*/
+            google.maps.event.addDomListener(window, "resize", function() {
+                var newCenter = center;
+                google.maps.event.trigger(map, "resize");
+                map.setCenter(newCenter);
+            });
+
+
 /*need to get list of items on index.html (because we will be doing search later) and set markers*/
 
             var locations = document.getElementById("location-list");
@@ -29,10 +37,23 @@
                                  map: map,
                                  position: uluru
                                  });
+
+
                 }
                 else {
                     console.log("Geocode was not successful for the following reason: " + status);
                 }
+
+
+
             });
+
+
         }
+
+
         }
+
+
+
+
