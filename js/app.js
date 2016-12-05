@@ -118,7 +118,9 @@ var ViewModel = function() {
                 self.locationList.push( new singleLocation(locationItem) );
             }
         });
+        initMap();
     })
+
 }
 
 ko.applyBindings(new ViewModel());
