@@ -17,29 +17,31 @@
 </head>
 <body>
 
-<div="container">
+<div class="container">
 
-    <div="row">
-        <div="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
             <h1>
                 Explore the North Shore!
             </h1>
         </div>
     </div>
 
-    <div="row">
-        <div="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
             <h6>
                 My favorite places to go on Chicago's North Shore
             </h6>
         </div>
     </div>
 
-    <div="row">
-        <div="col-md-6">
-
+    <div class="row">
+        <div class="col-md-6">
               <input placeholder='Search…' data-bind='value: query, valueUpdate: "afterkeydown"' />
-
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
 
             <span id="location-list" data-bind="foreach: locationList">
                 <div id="location-address" class="h5" data-bind="text: fullAddress">
@@ -48,7 +50,7 @@
             </span>
         </div>
 
-        <div="col-md-6">
+        <div class="col-md-6">
             <div id="map" style="height: 400px; width: 100%;">
                 Map not available-check address of site or internet connection.
             </div>

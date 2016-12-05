@@ -108,6 +108,7 @@ var ViewModel = function() {
 
     });
 
+/*search function*/
     self.query = ko.observable('')
 
     self.query.subscribe(function(value) {
@@ -118,8 +119,10 @@ var ViewModel = function() {
                 self.locationList.push( new singleLocation(locationItem) );
             }
         });
-        initMap();
-    })
+        deleteMarkers();
+        geoCodeLocations();
+/*minor bug, query limit if typing too fast*/
+        })
 
 }
 
