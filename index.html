@@ -8,44 +8,54 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/style.css" />
     <title>Explore North Shore</title>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript">
+  </script>
+  <script src='http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js'>
+  </script>
+
 </head>
 <body>
 
 <div="container">
 
-<div="row">
-<div="col-md-12">
-<h1>Explore the North Shore!</h1>
-</div>
-<div="row">
-<div="col-md-12">
-<h6>My favorite places to go on Chicago's North Shore</h3>
-</div>
-</div>
-</div>
+    <div="row">
+        <div="col-md-12">
+            <h1>
+                Explore the North Shore!
+            </h1>
+        </div>
+    </div>
+
+    <div="row">
+        <div="col-md-12">
+            <h6>
+                My favorite places to go on Chicago's North Shore
+            </h6>
+        </div>
+    </div>
+
+    <div="row">
+        <div="col-md-6">
+
+              <input placeholder='Search…' data-bind='value: query, valueUpdate: "afterkeydown"' />
 
 
-<div="row">
-<div="col-md-12">
+            <span id="location-list" data-bind="foreach: locationList">
+                <div id="location-address" class="h5" data-bind="text: fullAddress">
+                </div>
+        <!--         <hr>-->
+            </span>
+        </div>
 
-    <div id="location-list" data-bind="foreach: locationList">
-    <div id="location-address" class="h5" data-bind="text: fullAddress"></div>
-<!--         <hr>
- -->    </div>
+        <div="col-md-6">
+            <div id="map" style="height: 400px; width: 100%;">
+                Map not available-check address of site or internet connection.
+            </div>
+        </div> <!--col div-->
+    </div> <!--row div-->
+</div> <!--container div-->
 
-
-</div>
-</div>
-
-
-<div="row">
-<div="col-md-12">
-
-
-    <div id="map" style="height: 400px; width: 100%;">Map not available-check address of site or internet connection.</div>
-</div>
-</div>
-</div>
 
     <script src="js/map.js" async defer></script>
 

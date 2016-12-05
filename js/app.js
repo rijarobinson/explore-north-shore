@@ -99,7 +99,7 @@ var singleLocation = function(data) {
 }
 
 var ViewModel = function() {
-var self = this;
+    var self = this;
 
     this.locationList = ko.observableArray([]);
 
@@ -108,7 +108,34 @@ var self = this;
 
     });
 
+    self.query = ko.observable('')
+
+    self.query.subscribe(function(value) {
+/*        console.log("executing searchLocations");
+*/
+    self.locationList.removeAll();
+
+                locations.forEach(function(locationItem) {
+
+                    var searchString = locationItem.locationName + locationItem.streetAddress + locationItem.city;
+                if(searchString.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+
+                    self.locationList.push( new singleLocation(locationItem) );
+
+                }
+/*          if(self.locations[x].locationName.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+
+/*          if(self.locations[x].locationName.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+            self.locationList.push(locations[x]);
+          }
+*/
+
+    });
+})
+
 }
+
+
 
 
 ko.applyBindings(new ViewModel());
