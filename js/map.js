@@ -15,8 +15,6 @@
             });
 
 
-/*need to get list of items on index.html (because we will be doing search later) and set markers*/
-
             var locations = document.getElementById("location-list");
             for (var i = 0; i < locations.children.length; i++) {
 
