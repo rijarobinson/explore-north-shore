@@ -5,3 +5,8 @@ hr {
 #location-list {
     padding: 10px;
 }
+
+#location-picture {
+    height: 50px;
+    display: none;
+}

@@ -51,7 +51,7 @@ var locations = [
     city: 'Highland Park',
     state: 'IL',
     comment: 'Great breakfast & lunch sandwiches, gelato, and baked goods. Oh, and coffee!',
-    imgSrc: 'http://www.placekitten.com/200/100',
+    imgSrc: 'images/arrivadolce.jpg',
     searchTerms: [{ term: 'gelato'},{ term: 'restaurant'},{ term: 'coffee'},{ term: 'tea'},{ term: 'lunch'}]
     },
     {
@@ -105,7 +105,6 @@ var ViewModel = function() {
 
     locations.forEach(function(locationItem) {
         self.locationList.push( new singleLocation(locationItem) );
-
     });
 
 /*search function*/
@@ -113,15 +112,16 @@ var ViewModel = function() {
 
     self.query.subscribe(function(value) {
         self.locationList.removeAll();
+        deleteMarkers();
         locations.forEach(function(locationItem) {
         var searchString = locationItem.locationName + locationItem.streetAddress + locationItem.city;
             if(searchString.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
                 self.locationList.push( new singleLocation(locationItem) );
             }
         });
-        deleteMarkers();
-        geoCodeLocations();
-/*minor bug, query limit if typing too fast*/
+
+        setMapOnAll(map);
+/*minor bug, query limit if typing too fast, still not updating properly*/
         })
 
 }
