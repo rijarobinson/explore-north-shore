@@ -11,6 +11,10 @@ hr {
     display: none;
 }
 
+.location-picture {
+    height: 100px;
+}
+
 .location-comment {
     display: none;
 }

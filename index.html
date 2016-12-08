@@ -43,15 +43,35 @@
 <div class="row">
 <div class="col-md-6">
 
+
+
+<!--hide this info when item is selected-->
             <span id="location-list" data-bind="foreach: locationList">
-                <div class="location-address" data-bind="text: fullAddress"></div>
+                <div class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress"></div>
                 <div class="location-comment" data-bind="text: comment"></div>
                  <img src="" class="location-picture" data-bind="attr: {src: imgSrc}" />
                 <span class="location-latLon" data-bind="text: latLon">
                 </span>
-        <!--         <hr>-->
+                 <hr>
             </span>
+
+
+    <div data-bind="with: currentLocation">
+        <div id="location">
+            <h2 data-bind="text: locationName"></h2>
+            <h3 data-bind="text: streetAddress"></h3>
+            <div data-bind="text: city"></div>
+            <img class="single-pic" src="" alt="Location Picture" data-bind="attr: {src: imgSrc}">
+            <div data-bind="text: comment"></div>
+            <button data-bind="click: $parent.showList">Show List</button>
+            <!--additional data from yelp or instead of?-->
         </div>
+    </div>
+
+
+
+</div>
+
 
         <div class="col-md-6">
             <div id="map" style="height: 400px; width: 100%;">

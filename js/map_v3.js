@@ -56,10 +56,20 @@ function setUpMarkers(map) {
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           marker.setAnimation(google.maps.Animation.BOUNCE);
-        stopAnimation(marker);
-
+          stopAnimation(marker);
           infowindow.setContent('<img src="' + marker.image + '"style="width: 50px;"><br>' + marker.comment + '');
           infowindow.open(map, marker);
+        }
+      })(marker, i));
+
+      var listItemElement = document.getElementsByClassName("location-address")[i];
+
+      google.maps.event.addDomListener(listItemElement, 'click', (function(marker, i) {
+        return function() {
+          if (infowindow) {
+            infowindow.close();
+          }
+          marker.setAnimation(google.maps.Animation.BOUNCE);
         }
       })(marker, i));
 

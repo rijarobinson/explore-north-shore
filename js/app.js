@@ -86,9 +86,16 @@ var ViewModel = function() {
 
     this.locationList = ko.observableArray([]);
 
+    this.currentLocation = ko.observable( this.locationList()[0] );
+
+
     locations.forEach(function(locationItem) {
         self.locationList.push( new singleLocation(locationItem) );
     });
+    /*trying to sort list by city*/
+    self.locationList.sort(function (left, right) { return left.city == right.city ? 0 : (left.city < right.city ? -1 : 1) })
+
+
 
 /*search function*/
     self.query = ko.observable('')
@@ -104,6 +111,17 @@ var ViewModel = function() {
         /*TODO: figure out how to do this without initializing maps*/
         initialize();
         })
+
+    this.selectLocation = function(theLocation) {
+        self.currentLocation(theLocation);
+        $("#location-list").css("display", "none");
+    }
+
+    this.showList = function() {
+        $("#location-list").css("display", "block");
+        $("#location").css("display", "none");
+        initialize();
+    }
 
 }
 
