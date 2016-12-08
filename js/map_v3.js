@@ -55,6 +55,9 @@ function setUpMarkers(map) {
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
+          marker.setAnimation(google.maps.Animation.BOUNCE);
+        stopAnimation(marker);
+
           infowindow.setContent('<img src="' + marker.image + '"style="width: 50px;"><br>' + marker.comment + '');
           infowindow.open(map, marker);
         }
@@ -63,3 +66,9 @@ function setUpMarkers(map) {
     }
 
   }
+
+function stopAnimation(marker) {
+      setTimeout(function () {
+        marker.setAnimation(null);
+    }, 750);
+}
