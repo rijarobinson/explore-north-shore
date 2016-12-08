@@ -46,8 +46,14 @@
 
 
 <!--hide this info when item is selected-->
+<div class="text-right">
+
+<button class="collapse-button" data-bind="click: hideList">Hide List</button>
+<button class="expand-button" data-bind="click: showList">Show List</button>
+
+</div>
             <span id="location-list" data-bind="foreach: locationList">
-                <div class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress"></div>
+                <h5 class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress"></h5>
                 <div class="location-comment" data-bind="text: comment"></div>
                  <img src="" class="location-picture" data-bind="attr: {src: imgSrc}" />
                 <span class="location-latLon" data-bind="text: latLon">

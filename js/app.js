@@ -115,11 +115,21 @@ var ViewModel = function() {
     this.selectLocation = function(theLocation) {
         self.currentLocation(theLocation);
         $("#location-list").css("display", "none");
+        $(".collapse-button").css("display", "none");
+        $(".expand-button").css("display", "none");
+    }
+
+    this.hideList = function() {
+        $("#location-list").css("display", "none");
+        $(".collapse-button").css("display", "none");
+        $(".expand-button").css("display", "inline");
     }
 
     this.showList = function() {
         $("#location-list").css("display", "block");
         $("#location").css("display", "none");
+        $(".expand-button").css("display", "none");
+        $(".collapse-button").css("display", "inline");
         initialize();
     }
 
