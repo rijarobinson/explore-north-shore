@@ -6,7 +6,15 @@ hr {
     padding: 10px;
 }
 
-#location-picture {
+.location-picture {
     height: 50px;
+    display: none;
+}
+
+.location-comment {
+    display: none;
+}
+
+.location-latLon {
     display: none;
 }

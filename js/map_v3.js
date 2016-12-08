@@ -1,110 +1,65 @@
-  function initialize() {
-    var locations = [
-    {
-    locationName: 'Winnetka Thrift Shop',
-    streetAddress: '500 Green Bay Road',
-    city: 'Winnetka',
-    state: 'IL',
-    comment: 'Great place to get high end items on the cheap.',
-    imgSrc: 'http://www.placekitten.com/600/300',
-    imgAttribution: 'http://www.placekitten.com',
-    searchTerms: [ { term: "shopping" },
-                     { term: "store" },
-                     { term: "budget" },
-                     { term: "bargain" } ]
-    },
-    {
-    locationName: 'Forestway Drive',
-    streetAddress: 'Dundee Road and Forestway Drive',
-    city: 'Glencoe',
-    state: 'IL',
-    comment: 'Lovely drive featuring Skokie Lagoons.',
-    imgSrc: 'http://www.placekitten.com/500/250',
-    searchTerms: [{ term: 'nature'},{ term: 'beauty'},{ term: 'drive'},{ term: 'bike'}]
-    },
-    {
-    locationName: 'ArrivaDolce',
-    streetAddress: '1823 St Johns Ave',
-    city: 'Highland Park',
-    state: 'IL',
-    comment: 'Great breakfast & lunch sandwiches, gelato, and baked goods. Oh, and coffee!',
-    imgSrc: 'images/arrivadolce.jpg',
-    searchTerms: [{ term: 'gelato'},{ term: 'restaurant'},{ term: 'coffee'},{ term: 'tea'},{ term: 'lunch'}]
-    },
-    {
-    locationName: 'Highland Park Public Library',
-    streetAddress: '494 Laurel Ave',
-    city: 'Highland Park',
-    state: 'IL',
-    comment: 'Lovely library with lots of activities. Nice kids area.',
-    imgSrc: 'http://www.placekitten.com/200/100',
-    searchTerms: [{ term: 'books'},{ term: 'classes'},{ term: 'read'},{ term: 'downtown'}]
-    },
-    {
-    locationName: 'Pick-Staiger Concert Hall',
-    streetAddress: '1 Arts Circle Drive',
-    city: 'Evanston',
-    state: 'IL',
-    comment: 'Fantastic hall with top-notch talent right on the lakefront.',
-    imgSrc: 'http://www.placekitten.com/200/100',
-    searchTerms: [{ term: 'arts'},{ term: 'music'},{ term: 'entertainment'},{ term: 'northwestern'}]
-    },
-    {
-    locationName: 'Dowize Bistro',
-    streetAddress: '1107 Central Ave',
-    city: 'Wilmette',
-    state: 'IL',
-    comment: 'Delicious Thai & Japanese food in an adorable restaurant. Bento box lunches.',
-    imgSrc: 'http://www.placekitten.com/200/100',
-    searchTerms: [{ term: 'thai'},{ term: 'japanese'},{ term: 'restaurant'},{ term: 'bento'}]
-    },
-    ]
-;
+var markers = [];
 
+
+  function initialize() {
+
+
+    var center = {lat: 42.1342464, lng: -87.7810725};
+/*    console.log("center: " + center.lat + ", " + center.lng);
+*/
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 11,
-      center: new google.maps.LatLng(42.1342464, -87.7810725),
+      center: center,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
+    google.maps.event.addDomListener(window, "resize", function() {
+    var newCenter = center;
+    google.maps.event.trigger(map, "resize");
+    map.setCenter(newCenter);
+        });
+
+    setUpMarkers(map);
+}
+
+function setUpMarkers(map) {
+
     var infowindow = new google.maps.InfoWindow();
 
-    var geocoder = new google.maps.Geocoder();
+    var latLng = document.getElementById('location-list').getElementsByClassName("location-latLon");
+    var imageList = document.getElementById('location-list').getElementsByClassName("location-picture");
+    var comments = document.getElementById('location-list').getElementsByClassName("location-comment");
 
-    var marker, i;
+    for (i = 0; i < latLng.length; i++) {
 
-    for (i = 0; i < locations.length; i++) {
-      var address = locations[i].locationName + ", " + locations[i].streetAddress + ", " + locations[i].city;
+      var position = latLng[i].innerHTML;
+      var latLongStrip = position.replace("{lat: ","").replace("lng: ","").replace("}","");
+      var latlngSplit = latLongStrip.split(',');
 
-        geocoder.geocode({ "address": address }, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK ) {
-            latLng = results[0].geometry.location;
-                }
-                else {
-                    console.log("Geocode was not successful for the following reason: " + status);
-                }
-            });
+      var lat = (parseFloat(latlngSplit[0]));
+      var lng = (parseFloat(latlngSplit[1]));
+
+      var image = imageList[i].src;
+      var comment = comments[i].innerHTML;
+
+      var marker, i;
 
       marker = new google.maps.Marker({
-        position: new google.maps.LatLng(latLng),
-        map: map
-      });
+          animation: google.maps.Animation.DROP,
+          position: {lat: lat, lng: lng},
+          map: map
+        });
+      marker.image = image;
+      marker.comment = comment;
+      markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
-          infowindow.setContent(locations[i][0]);
+          infowindow.setContent('<img src="' + marker.image + '"style="width: 50px;"><br>' + marker.comment + '');
           infowindow.open(map, marker);
         }
       })(marker, i));
+
     }
-  }
 
-  function loadScript() {
-      var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDDVId7-jJjGL6LwbveKl60DqYi4GEubgs&v=3.exp&' +
-      'callback=initialize';
-  document.body.appendChild(script);
   }
-
-  window.onload = loadScript;

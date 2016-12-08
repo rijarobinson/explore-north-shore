@@ -44,9 +44,11 @@
 <div class="col-md-6">
 
             <span id="location-list" data-bind="foreach: locationList">
-                <div class="location-address" class="h5" data-bind="text: fullAddress">
-                 <img src="" id="location-picture" data-bind="attr: {src: imgSrc}" />
-                </div>
+                <div class="location-address" data-bind="text: fullAddress"></div>
+                <div class="location-comment" data-bind="text: comment"></div>
+                 <img src="" class="location-picture" data-bind="attr: {src: imgSrc}" />
+                <span class="location-latLon" data-bind="text: latLon">
+                </span>
         <!--         <hr>-->
             </span>
         </div>
@@ -61,12 +63,9 @@
 
 
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGlGZ5rJOgFVxkz8biOVu0Ni6LmVyEddQ&callback=initMap">
-    </script>
-
     <script src="js/lib/knockout-3.4.1.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/map.js" async defer></script>
+    <script src="js/map_v3.js"></script>
 
 
 

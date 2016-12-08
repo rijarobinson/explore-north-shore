@@ -1,31 +1,7 @@
-/*tried to import info from supplied file, will have to try again later*/
-/*function getJSONP(url, success) {
-
-    var ud = '_' + +new Date,
-        script = document.createElement('script'),
-        head = document.getElementsByTagName('head')[0]
-               || document.documentElement;
-
-    window[ud] = function(data) {
-        head.removeChild(script);
-        success && success(data);
-    };
-
-    script.src = url.replace('callback=?', 'callback=' + ud);
-    head.appendChild(script);
-
-}*/
-/*found on stackoverflow.com*/
-
-/*var locations = getJSONP("data/data.json", function(data) {
-    console.log("data: " + data);
-});*/
-
-
 var locations = [
     {
     locationName: 'Winnetka Thrift Shop',
-    streetAddress: '500 Green Bay Road',
+    streetAddress: '992 Green Bay Rd',
     city: 'Winnetka',
     state: 'IL',
     comment: 'Great place to get high end items on the cheap.',
@@ -34,7 +10,8 @@ var locations = [
     searchTerms: [ { term: "shopping" },
                      { term: "store" },
                      { term: "budget" },
-                     { term: "bargain" } ]
+                     { term: "bargain" } ],
+    latLon: {lat: 42.118897, lng: -87.745540}
     },
     {
     locationName: 'Forestway Drive',
@@ -43,7 +20,8 @@ var locations = [
     state: 'IL',
     comment: 'Lovely drive featuring Skokie Lagoons.',
     imgSrc: 'http://www.placekitten.com/500/250',
-    searchTerms: [{ term: 'nature'},{ term: 'beauty'},{ term: 'drive'},{ term: 'bike'}]
+    searchTerms: [{ term: 'nature'},{ term: 'beauty'},{ term: 'drive'},{ term: 'bike'}],
+    latLon: {lat: 42.137770, lng: -87.774490}
     },
     {
     locationName: 'ArrivaDolce',
@@ -52,7 +30,8 @@ var locations = [
     state: 'IL',
     comment: 'Great breakfast & lunch sandwiches, gelato, and baked goods. Oh, and coffee!',
     imgSrc: 'images/arrivadolce.jpg',
-    searchTerms: [{ term: 'gelato'},{ term: 'restaurant'},{ term: 'coffee'},{ term: 'tea'},{ term: 'lunch'}]
+    searchTerms: [{ term: 'gelato'},{ term: 'restaurant'},{ term: 'coffee'},{ term: 'tea'},{ term: 'lunch'}],
+    latLon: {lat: 42.185851, lng:  -87.798208}
     },
     {
     locationName: 'Highland Park Public Library',
@@ -61,7 +40,8 @@ var locations = [
     state: 'IL',
     comment: 'Lovely library with lots of activities. Nice kids area.',
     imgSrc: 'http://www.placekitten.com/200/100',
-    searchTerms: [{ term: 'books'},{ term: 'classes'},{ term: 'read'},{ term: 'downtown'}]
+    searchTerms: [{ term: 'books'},{ term: 'classes'},{ term: 'read'},{ term: 'downtown'}],
+    latLon: {lat: 42.184765, lng: -87.796784}
     },
     {
     locationName: 'Pick-Staiger Concert Hall',
@@ -69,19 +49,21 @@ var locations = [
     city: 'Evanston',
     state: 'IL',
     comment: 'Fantastic hall with top-notch talent right on the lakefront.',
-    imgSrc: 'http://www.placekitten.com/200/100',
-    searchTerms: [{ term: 'arts'},{ term: 'music'},{ term: 'entertainment'},{ term: 'northwestern'}]
-    },
+    imgSrc: 'images/banner_pickstaiger1.jpg',
+    searchTerms: [{ term: 'arts'},{ term: 'music'},{ term: 'entertainment'},{ term: 'northwestern'}],
+    latLon: {lat: 42.052856, lng: -87.672195}
+        },
     {
     locationName: 'Dowize Bistro',
     streetAddress: '1107 Central Ave',
     city: 'Wilmette',
     state: 'IL',
     comment: 'Delicious Thai & Japanese food in an adorable restaurant. Bento box lunches.',
-    imgSrc: 'http://www.placekitten.com/200/100',
-    searchTerms: [{ term: 'thai'},{ term: 'japanese'},{ term: 'restaurant'},{ term: 'bento'}]
+    imgSrc: 'http://www.placekitten.com/150/75',
+    searchTerms: [{ term: 'thai'},{ term: 'japanese'},{ term: 'restaurant'},{ term: 'bento'}],
+    latLon: {lat: 42.076672, lng: -87.705205}
     },
-    ]
+    ];
 
 var singleLocation = function(data) {
 
@@ -95,6 +77,7 @@ var singleLocation = function(data) {
     this.comment = ko.observable(data.comment);
     this.imgSrc = ko.observable(data.imgSrc);
     this.imgAttribution = ko.observable(data.imgAttribution);
+    this.latLon = ko.observable('{lat: ' + data.latLon.lat + ', lng: ' + data.latLon.lng + '}');
 
 }
 
@@ -112,18 +95,27 @@ var ViewModel = function() {
 
     self.query.subscribe(function(value) {
         self.locationList.removeAll();
-        deleteMarkers();
         locations.forEach(function(locationItem) {
         var searchString = locationItem.locationName + locationItem.streetAddress + locationItem.city;
             if(searchString.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
                 self.locationList.push( new singleLocation(locationItem) );
             }
         });
-
-        setMapOnAll(map);
-/*minor bug, query limit if typing too fast, still not updating properly*/
+        /*TODO: figure out how to do this without initializing maps*/
+        initialize();
         })
 
 }
+
+  function loadScript() {
+      var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDDVId7-jJjGL6LwbveKl60DqYi4GEubgs&v=3.exp&' +
+      'callback=initialize';
+  document.body.appendChild(script);
+  }
+
+  window.onload = loadScript;
+
 
 ko.applyBindings(new ViewModel());
