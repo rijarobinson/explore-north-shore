@@ -55,6 +55,8 @@
             <span id="location-list" data-bind="foreach: sortedLocationList">
                 <h5 class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress"></h5>
                 <div class="location-comment" data-bind="text: comment"></div>
+                <div class="location-fsid" data-bind="text: fSId"></div>
+                <div class="location-description" data-bind="text: description"></div>
                  <img src="" class="location-picture" data-bind="attr: {src: imgSrc}" />
                 <span class="location-latLon" data-bind="text: latLon">
                 </span>
@@ -89,24 +91,11 @@
 
 <div id="names">
 </div>
-<script>
-    $.getJSON('https://api.foursquare.com/v2/venues/4ab66d3bf964a5200b7720e3/tips?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209',
-    function(data) {
-        console.log("data: " + JSON.stringify(data["response"]["tips"]["items"]));
-        $.each(data.response["tips"]["items"], function(i,venues){
-            content = '<p>' + JSON.stringify(data.response["tips"]["items"][i]["text"]) + '-' + i + '-names div</p>';
-            $(content).appendTo("#names");
-       });
-});
-</script>
-
-
-<a href='https://api.foursquare.com/v2/venues/4ab66d3bf964a5200b7720e3/tips?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209'>hmm</a>
 
     <script src="js/lib/knockout-3.4.1.js"></script>
     <script src="js/app.js" async></script>
+    <script src="js/foursquare.js"></script>
     <script src="js/map_v3.js" async></script>
-    <script src="js/yelp.js" async></script>
 
 
 

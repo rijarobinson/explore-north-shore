@@ -39,6 +39,9 @@ has something to do with how my js files are ordered*/
     var latLng = document.getElementById('location-list').getElementsByClassName("location-latLon");
     var imageList = document.getElementById('location-list').getElementsByClassName("location-picture");
     var comments = document.getElementById('location-list').getElementsByClassName("location-comment");
+    var fSIdList = document.getElementById('location-list').getElementsByClassName("location-fsid");
+    var descriptions = document.getElementById('location-list').getElementsByClassName("location-description");
+
 
     for (i = 0; i < latLng.length; i++) {
 
@@ -52,6 +55,34 @@ has something to do with how my js files are ordered*/
       var image = imageList[i].src;
       var comment = comments[i].innerHTML;
 
+      var fSId = fSIdList[i].innerHTML;
+
+      var description = descriptions[i].innerHTML;
+
+      var tips = '';
+
+    var fsRequestTimeout = setTimeout(function() {
+        tips = "There was a problem with getting the foursquare data.";
+    }, 8000);
+
+      if(fSId == '') {
+        tips = description;
+      }
+      else {
+        $.ajax({
+            url: "https://api.foursquare.com/v2/venues/" + fSId + "/tips?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
+            async: false,
+            dataType: 'json',
+            success: function(data) {
+              tips = JSON.stringify(data.response["tips"]['items'][0]["text"]);
+              clearTimeout(fsRequestTimeout);
+            },
+            error: function() {
+              tips = "There was a problem with getting the foursquare data";
+            },
+        });
+  }
+
       var marker, i;
 
       marker = new google.maps.Marker({
@@ -61,14 +92,16 @@ has something to do with how my js files are ordered*/
         });
       marker.image = image;
       marker.comment = comment;
+      marker.tips = tips;
       markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
           marker.setAnimation(google.maps.Animation.BOUNCE);
           stopAnimation(marker);
-          infowindow.setContent('<img src="' + marker.image + '"style="width: 50px;"><br>' + marker.comment + '');
-          infowindow.open(map, marker);
+          infowindow.setContent(marker.tips);
+/*          ('<img src="' + marker.image + '"style="width: 50px;"><br>' + marker.comment + '');
+*/          infowindow.open(map, marker);
         }
       })(marker, i));
 
@@ -92,4 +125,3 @@ function stopAnimation(marker) {
         marker.setAnimation(null);
     }, 750);
 }
-
