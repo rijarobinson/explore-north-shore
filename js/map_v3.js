@@ -18,14 +18,24 @@ var markers = [];
     google.maps.event.trigger(map, "resize");
     map.setCenter(newCenter);
         });
-
     setUpMarkers(map);
+/* APPOINTMENT: I don't want to have to initialize the map everytime I update the markers.
+I know I can delete markers and reset them, but I also want to initialize the map once
+and only update the markers when locationList changes. I also think this is related to
+the order of the files in Index.html. I want to initialize the map upon load, then make a call to
+setUpMarkers from app.js when I want to update the markers, passing in the map and preferable the
+locationList so I don't have to get elements from the DOM*/
+
 }
 
 function setUpMarkers(map) {
 
     var infowindow = new google.maps.InfoWindow();
+/* Would like to style markers by category (e.g. restaurant, entertainment, nature). Would prefer
+to do using the dataset rather than getting elements from DOM. So wait post-appt*/
 
+/* APPOINTMENT: I want to get data from locationList rather than DOM, I think the issue
+has something to do with how my js files are ordered*/
     var latLng = document.getElementById('location-list').getElementsByClassName("location-latLon");
     var imageList = document.getElementById('location-list').getElementsByClassName("location-picture");
     var comments = document.getElementById('location-list').getElementsByClassName("location-comment");
@@ -82,3 +92,4 @@ function stopAnimation(marker) {
         marker.setAnimation(null);
     }, 750);
 }
+
