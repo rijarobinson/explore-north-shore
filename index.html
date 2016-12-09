@@ -52,7 +52,7 @@
 <button class="expand-button" data-bind="click: showList">Show List</button>
 
 </div>
-            <span id="location-list" data-bind="foreach: locationList">
+            <span id="location-list" data-bind="foreach: sortedLocationList">
                 <h5 class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress"></h5>
                 <div class="location-comment" data-bind="text: comment"></div>
                  <img src="" class="location-picture" data-bind="attr: {src: imgSrc}" />
@@ -90,8 +90,9 @@
 
 
     <script src="js/lib/knockout-3.4.1.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/map_v3.js"></script>
+    <script src="js/app.js" async></script>
+    <script src="js/map_v3.js" async></script>
+
 
 
 

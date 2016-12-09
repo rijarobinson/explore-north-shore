@@ -93,7 +93,14 @@ var ViewModel = function() {
         self.locationList.push( new singleLocation(locationItem) );
     });
     /*trying to sort list by city*/
-    self.locationList.sort(function (left, right) { return left.city == right.city ? 0 : (left.city < right.city ? -1 : 1) })
+
+    this.sortedLocationList = ko.computed(function() {
+           return self.locationList().sort(function (left, right) {
+                return left.city() == right.city() ?
+                     0 :
+                     (left.city() < right.city() ? -1 : 1);
+           });
+        });
 
 
 
@@ -134,6 +141,7 @@ var ViewModel = function() {
     }
 
 }
+
 
   function loadScript() {
       var script = document.createElement('script');
