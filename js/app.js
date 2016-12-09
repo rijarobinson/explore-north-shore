@@ -11,7 +11,9 @@ var locations = [
                      { term: "store" },
                      { term: "budget" },
                      { term: "bargain" } ],
-    latLon: {lat: 42.118897, lng: -87.745540}
+    latLon: {lat: 42.118897, lng: -87.745540},
+    fSId: '4defd1cc227170314bad2a7a',
+    description: ''
     },
     {
     locationName: 'Forestway Drive',
@@ -21,7 +23,9 @@ var locations = [
     comment: 'Lovely drive featuring Skokie Lagoons.',
     imgSrc: 'http://www.placekitten.com/500/250',
     searchTerms: [{ term: 'nature'},{ term: 'beauty'},{ term: 'drive'},{ term: 'bike'}],
-    latLon: {lat: 42.137770, lng: -87.774490}
+    latLon: {lat: 42.137770, lng: -87.774490},
+    fSId: '',
+    description: 'Starts at Dundee and Forestway in Glencoe on the north end and winds its way to Tower, then Willow Road. A great way to go north/south on the North Shore.'
     },
     {
     locationName: 'ArrivaDolce',
@@ -31,7 +35,9 @@ var locations = [
     comment: 'Great breakfast & lunch sandwiches, gelato, and baked goods. Oh, and coffee!',
     imgSrc: 'images/arrivadolce.jpg',
     searchTerms: [{ term: 'gelato'},{ term: 'restaurant'},{ term: 'coffee'},{ term: 'tea'},{ term: 'lunch'}],
-    latLon: {lat: 42.185851, lng:  -87.798208}
+    latLon: {lat: 42.185851, lng:  -87.798208},
+    fSId: '4df93ea745dd2b6764bb4048',
+    description: ''
     },
     {
     locationName: 'Highland Park Public Library',
@@ -41,7 +47,9 @@ var locations = [
     comment: 'Lovely library with lots of activities. Nice kids area.',
     imgSrc: 'http://www.placekitten.com/200/100',
     searchTerms: [{ term: 'books'},{ term: 'classes'},{ term: 'read'},{ term: 'downtown'}],
-    latLon: {lat: 42.184765, lng: -87.796784}
+    latLon: {lat: 42.184765, lng: -87.796784},
+    fSId: '4ab66d3bf964a5200b7720e3',
+    description: ''
     },
     {
     locationName: 'Pick-Staiger Concert Hall',
@@ -51,8 +59,10 @@ var locations = [
     comment: 'Fantastic hall with top-notch talent right on the lakefront.',
     imgSrc: 'images/banner_pickstaiger1.jpg',
     searchTerms: [{ term: 'arts'},{ term: 'music'},{ term: 'entertainment'},{ term: 'northwestern'}],
-    latLon: {lat: 42.052856, lng: -87.672195}
-        },
+    latLon: {lat: 42.052856, lng: -87.672195},
+    fSId: '4b5475c7f964a5200ebc27e3',
+    description: ''
+    },
     {
     locationName: 'Dowize Bistro',
     streetAddress: '1107 Central Ave',
@@ -61,7 +71,9 @@ var locations = [
     comment: 'Delicious Thai & Japanese food in an adorable restaurant. Bento box lunches.',
     imgSrc: 'http://www.placekitten.com/150/75',
     searchTerms: [{ term: 'thai'},{ term: 'japanese'},{ term: 'restaurant'},{ term: 'bento'}],
-    latLon: {lat: 42.076672, lng: -87.705205}
+    latLon: {lat: 42.076672, lng: -87.705205},
+    fSId: '4fe6587fe4b0af2e67710fc6',
+    description: ''
     },
     ];
 
@@ -78,6 +90,8 @@ var singleLocation = function(data) {
     this.imgSrc = ko.observable(data.imgSrc);
     this.imgAttribution = ko.observable(data.imgAttribution);
     this.latLon = ko.observable('{lat: ' + data.latLon.lat + ', lng: ' + data.latLon.lng + '}');
+    this.fSId = ko.observable(data.fSId);
+    this.description = ko.observable(data.description);
 
 }
 
