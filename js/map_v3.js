@@ -60,28 +60,48 @@ has something to do with how my js files are ordered*/
       var description = descriptions[i].innerHTML;
 
       var tips = '';
+      var name = '';
+
+      var linkToVenue = 'https://foursquare.com/v/' + fSId;
 
     var fsRequestTimeout = setTimeout(function() {
         tips = "There was a problem with getting the foursquare data.";
     }, 8000);
 
-      if(fSId == '') {
-        tips = description;
-      }
-      else {
-        $.ajax({
-            url: "https://api.foursquare.com/v2/venues/" + fSId + "/tips?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
-            async: false,
-            dataType: 'json',
-            success: function(data) {
-              tips = JSON.stringify(data.response["tips"]['items'][0]["text"]);
-              clearTimeout(fsRequestTimeout);
-            },
-            error: function() {
-              tips = "There was a problem with getting the foursquare data";
-            },
-        });
-  }
+    if(fSId == '') {
+      tips = description;
+      name = 'another source for name';
+    }
+    else {
+      $.ajax({
+          url: "https://api.foursquare.com/v2/venues/" + fSId + "/tips?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
+          async: false,
+          dataType: 'json',
+          success: function(data) {
+            returnedTips = JSON.stringify(data.response["tips"]['items'][0]["text"]);
+            tips = returnedTips.replace(/\"/g,"");
+            clearTimeout(fsRequestTimeout);
+          },
+          error: function() {
+            tips = "There was a problem with getting the foursquare data";
+          },
+      });
+            $.ajax({
+          url: "https://api.foursquare.com/v2/venues/" + fSId + "?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
+          async: false,
+          dataType: 'json',
+          success: function(data) {
+            returnedName = JSON.stringify(data.response["venue"]['name']);
+            name = returnedName.replace(/\"/g,"");
+
+            clearTimeout(fsRequestTimeout);
+          },
+          error: function() {
+            tips = "There was a problem with getting the foursquare data";
+          },
+      });
+
+    }
 
       var marker, i;
 
@@ -93,15 +113,29 @@ has something to do with how my js files are ordered*/
       marker.image = image;
       marker.comment = comment;
       marker.tips = tips;
+      marker.name = name;
+      marker.fSId = fSId;
+      marker.linkText = linkToVenue;
       markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', (function(marker, i) {
         return function() {
+          var content;
           marker.setAnimation(google.maps.Animation.BOUNCE);
           stopAnimation(marker);
-          infowindow.setContent(marker.tips);
-/*          ('<img src="' + marker.image + '"style="width: 50px;"><br>' + marker.comment + '');
-*/          infowindow.open(map, marker);
+          if (marker.fSId) {
+            content = '<div class="text-right"><img src="images/foursquare.png" style="width: 100px;"></div>' +
+                      '<div class="add-padding"><a href="' + marker.linkText + '"><span class="add-padding">' +
+                      '<img src="' + marker.image + '"style="width: 50px;"></span>' +
+                      marker.name + '</div></a><div class="add-padding">' + marker.tips + '</div></div>';
+          }
+          else {
+            content = '<div class="text-right">No FOURSQUARE listing for this item.</div><span class="add-padding">' +
+            '<img src="' + marker.image + '"style="width: 50px;"></span><span class="add-padding">' +
+            marker.name + '</span></a><div class="add-padding">' + marker.tips + '</div></div>';
+          }
+          infowindow.setContent(content);
+          infowindow.open(map, marker);
         }
       })(marker, i));
 
@@ -115,9 +149,7 @@ has something to do with how my js files are ordered*/
           marker.setAnimation(google.maps.Animation.BOUNCE);
         }
       })(marker, i));
-
     }
-
   }
 
 function stopAnimation(marker) {
