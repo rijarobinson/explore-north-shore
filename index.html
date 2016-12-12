@@ -38,29 +38,21 @@
     <div class="row">
         <div class="col-md-6">
 
-            <p>Filter: <input data-bind="value: filter, valueUpdate: 'afterkeydown'" /></p>
-
-<!--               <input placeholder='Search…' data-bind='value: query, valueUpdate: "afterkeyup"' />
- --></div>
+        <input placeholder="Search..." data-bind="value: filter, valueUpdate: 'afterkeydown'" />
+</div>
 </div>
 <div class="row">
 <div class="col-md-6">
 
 
 
-<!--hide this info when item is selected-->
 <div class="text-right">
 <button class="hide-list-button" data-bind="click: hideList, css: { hide: hidden() === true }">Hide List</button>
 <button class="show-list-button" data-bind="click: showList, css: { show: hidden() === true }">Show List</button>
 </div>
 
-            <span id="location-list" data-bind="foreach: locationList, css: { hide: hidden() === true }">
+            <span id="location-list" data-bind="foreach: filteredItems, css: { hide: hidden() === true }">
                 <h5 class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress"></h5>
-                <div class="location-comment" data-bind="text: comment"></div>
-                <div class= "location-fsid" data-bind="text: fSId"></div>
-                <div class="location-description" data-bind="text: description"></div>
-                 <img src="" class="location-picture" data-bind="attr: {src: imgSrc}" />
-                <span class="location-latLon" data-bind="text: latLon">
                 </span>
                  <hr>
             </span>

@@ -16,22 +16,6 @@ hr {
     height: 100px;
 }
 
-.location-comment {
-    display: none;
-}
-
-.location-latLon {
-    display: none;
-}
-
-.location-fsid {
-    display: none;
-}
-
-.location-description {
-    display: none;
-}
-
 .add-padding {
     padding: 5px;
 }

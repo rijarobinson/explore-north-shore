@@ -95,9 +95,7 @@ var singleLocation = function(data) {
     this.streetAddress = data.streetAddress;
     this.city = data.city;
     this.state = data.state;
-    this.fullAddress = ko.computed(function() {
-        return data.locationName + '-' + data.streetAddress + '-' + data.city;
-    })
+    this.fullAddress = data.locationName + '-' + data.streetAddress + '-' + data.city;
     this.comment = data.comment;
     this.imgSrc = data.imgSrc;
     this.imgAttribution = data.imgAttribution;
@@ -118,67 +116,45 @@ var ViewModel = function() {
     this.locationList = ko.observableArray([]);
 
     this.currentLocation = ko.observable( this.locationList()[0] );
-
-
     locations.forEach(function(locationItem) {
         self.locationList.push( new singleLocation(locationItem) );
     });
 
-/*    this.sortedLocationList = ko.computed(function() {
-           return self.locationList().sort(function (left, right) {
-                return left.city() == right.city() ?
+
+this.locationList().sort(function (left, right) {
+                return left.city == right.city ?
                      0 :
-                     (left.city() < right.city() ? -1 : 1);
+                     (left.city < right.city ? -1 : 1);
            });
-        });*/
-
-
-
-/*search function*/
-/*    self.query = ko.observable('')
-
-    self.query.subscribe(function(value) {
-        self.locationList.removeAll();
-        locations.forEach(function(locationItem) {
-        var searchString = locationItem.locationName + locationItem.streetAddress + locationItem.city + locationItem.searchTerms;
-            if(searchString.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
-                self.locationList.push( new singleLocation(locationItem) );
-            }
-        });
-        /*TODO: figure out how to do this without initializing maps, just place the markers (preferably
-            from locationList*/
-/*        initialize();
-        })
-*/
-
-/*filter is not currently doing anything--try after making other changes.*/
 
 self.filter = ko.observable('')
 
-/*this.filteredItems = ko.computed(function() {
-    var filter = this.filter().toLowerCase();
+this.filteredItems = ko.computed(function() {
+    var filter = self.filter().toLowerCase();
     if (!filter) {
-        return this.locationList();
+        setAllOnMap();
+        return this.locationList()
     } else {
-        console.log("the list is trying to be filtered.");
-        return ko.utils.arrayFilter(this.locationList, function(single) {
-
-        var searchString = single.locationName + single.streetAddress + single.city + single.searchTerms;
-
-            return ko.utils.stringStartsWith(searchString.toLowerCase(), filter);
+        return ko.utils.arrayFilter(this.locationList(), function(single) {
+            var searchString = single.fullAddress.toLowerCase();
+            if (ko.utils.stringIsIn(searchString, filter) === true) {
+                single.marker.setVisible(true);
+                return ko.utils.stringIsIn(searchString, filter);
+            }
+            else {
+                single.marker.setVisible(false);
+            };
         });
     }
 }, this);
 
 
-ko.utils.stringStartsWith = function (string, startsWith) {
+ko.utils.stringIsIn = function(string, isIn) {
     string = string || "";
-    if (startsWith.length > string.length)
+    if (isIn.length > string.length)
         return false;
-    return string.substring(0, startsWith.length) === startsWith;
-}*/
-
-
+    return string.indexOf(isIn) >= 0;
+}
 
 
 self.hidden = ko.observable(false);
@@ -202,7 +178,12 @@ self.hidden = ko.observable(false);
             infowindow.close();
             google.maps.event.trigger(map, "resize");
             map.setCenter({lat: 42.1342464, lng: -87.7810725});
-
         }
     }
+}
+
+function setAllOnMap() {
+    locations.forEach(function(locationItem) {
+        locationItem.marker.setVisible(true);
+    });
 }

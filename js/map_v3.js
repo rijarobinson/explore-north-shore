@@ -110,7 +110,7 @@ locations.forEach(function(location) {
       marker = new google.maps.Marker({
           animation: google.maps.Animation.DROP,
           position: location.latLon,
-          map: map
+          map: map,
         });
 
       /*pull these properties out of location*/
