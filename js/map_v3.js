@@ -1,13 +1,15 @@
 /*active markers are stored in an array. Will use this if I decide to delete markers
 upon placing searched markers. If not, I don't need array.*/
 var markers = [];
+var map;
+var infowindow;
 
 
   function initialize() {
 
 
     var center = {lat: 42.1342464, lng: -87.7810725};
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
       zoom: 11,
       center: center,
       mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -18,7 +20,9 @@ var markers = [];
     google.maps.event.trigger(map, "resize");
     map.setCenter(newCenter);
         });
-    setUpMarkers(map);
+
+    infowindow = new google.maps.InfoWindow();
+    setUpMarkers();
 /* APPOINTMENT: I don't want to have to initialize the map everytime I update the markers.
 I know I can delete markers and reset them, but I also want to initialize the map once
 and only update the markers when locationList changes. I also think this is related to
@@ -28,15 +32,12 @@ locationList so I don't have to get elements from the DOM*/
 
 }
 
-function setUpMarkers(map) {
+function setUpMarkers() {
 
-    var infowindow = new google.maps.InfoWindow();
 /* Would like to style markers by category (e.g. restaurant, entertainment, nature). Would prefer
 to do using the dataset rather than getting elements from DOM. So wait post-appt*/
 
-/* APPOINTMENT: I want to get data from locationList rather than DOM, I think the issue
-has something to do with how my js files are ordered*/
-    var latLng = document.getElementById('location-list').getElementsByClassName("location-latLon");
+/*    var latLng = document.getElementById('location-list').getElementsByClassName("location-latLon");
     var imageList = document.getElementById('location-list').getElementsByClassName("location-picture");
     var comments = document.getElementById('location-list').getElementsByClassName("location-comment");
     var fSIdList = document.getElementById('location-list').getElementsByClassName("location-fsid");
@@ -61,43 +62,44 @@ has something to do with how my js files are ordered*/
 
       var tips = '';
       var name = '';
+*/
 
-      var linkToVenue = 'https://foursquare.com/v/' + fSId;
+/*storing new information in locations dataset*/
+locations.forEach(function(location) {
+      location.linkToVenue = 'https://foursquare.com/v/' + location.fSId;
 
     var fsRequestTimeout = setTimeout(function() {
         tips = "There was a problem with getting the foursquare data.";
     }, 8000);
 
-    if(fSId == '') {
-      tips = description;
-      name = 'another source for name';
+    if(location.fSId == '') {
+      location.tips = location.description;
+      location.name = 'another source for name';
     }
     else {
       $.ajax({
-          url: "https://api.foursquare.com/v2/venues/" + fSId + "/tips?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
-          async: false,
+          url: "https://api.foursquare.com/v2/venues/" + location.fSId + "/tips?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
           dataType: 'json',
           success: function(data) {
             returnedTips = JSON.stringify(data.response["tips"]['items'][0]["text"]);
-            tips = returnedTips.replace(/\"/g,"");
+            location.tips = returnedTips.replace(/\"/g,"");
             clearTimeout(fsRequestTimeout);
           },
           error: function() {
-            tips = "There was a problem with getting the foursquare data";
+            location.tips = "There was a problem with getting the foursquare data";
           },
       });
             $.ajax({
-          url: "https://api.foursquare.com/v2/venues/" + fSId + "?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
-          async: false,
+          url: "https://api.foursquare.com/v2/venues/" + location.fSId + "?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
           dataType: 'json',
           success: function(data) {
             returnedName = JSON.stringify(data.response["venue"]['name']);
-            name = returnedName.replace(/\"/g,"");
+            location.name = returnedName.replace(/\"/g,"");
 
             clearTimeout(fsRequestTimeout);
           },
           error: function() {
-            tips = "There was a problem with getting the foursquare data";
+            location.tips = "There was a problem with getting the foursquare data";
           },
       });
 
@@ -107,53 +109,63 @@ has something to do with how my js files are ordered*/
 
       marker = new google.maps.Marker({
           animation: google.maps.Animation.DROP,
-          position: {lat: lat, lng: lng},
+          position: location.latLon,
           map: map
         });
-      marker.image = image;
-      marker.comment = comment;
-      marker.tips = tips;
-      marker.name = name;
-      marker.fSId = fSId;
-      marker.linkText = linkToVenue;
+
+      /*pull these properties out of location*/
+      marker.fSId = location.fSId;
+      marker.linkText = location.linkToVenue;
       markers.push(marker);
 
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+
+      google.maps.event.addListener(marker, 'click', (function(location, i) {
         return function() {
           var content;
           marker.setAnimation(google.maps.Animation.BOUNCE);
           stopAnimation(marker);
           if (marker.fSId) {
             content = '<div class="text-right"><img src="images/foursquare.png" style="width: 100px;"></div>' +
-                      '<div class="add-padding"><a href="' + marker.linkText + '"><span class="add-padding">' +
-                      '<img src="' + marker.image + '"style="width: 50px;"></span>' +
-                      marker.name + '</div></a><div class="add-padding">' + marker.tips + '</div></div>';
+                      '<div class="add-padding"><a href="' + location.linkText + '"><span class="add-padding">' +
+                      '<img src="' + location.imgSrc + '"style="width: 50px;"></span>' +
+                      location.name + '</div></a><div class="add-padding">Tips from FOURSQUARE<br>' + location.tips + '</div></div>';
           }
           else {
             content = '<div class="text-right">No FOURSQUARE listing for this item.</div><span class="add-padding">' +
-            '<img src="' + marker.image + '"style="width: 50px;"></span><span class="add-padding">' +
-            marker.name + '</span></a><div class="add-padding">' + marker.tips + '</div></div>';
+            '<img src="' + location.imgSrc + '"style="width: 50px;"></span><span class="add-padding">' +
+            location.name + '</span></a><div class="add-padding">' + location.tips + '</div></div>';
           }
           infowindow.setContent(content);
           infowindow.open(map, marker);
         }
-      })(marker, i));
+      })(location, i));
 
-      var listItemElement = document.getElementsByClassName("location-address")[i];
 
-      google.maps.event.addDomListener(listItemElement, 'click', (function(marker, i) {
+    location.marker = marker;
+
+/*
+      google.maps.event.addListener(marker, 'click', (function(location, i) {
         return function() {
           if (infowindow) {
             infowindow.close();
           }
           marker.setAnimation(google.maps.Animation.BOUNCE);
         }
-      })(marker, i));
-    }
-  }
+      })(location, i));
+*/
+    })
+
+ko.applyBindings(new ViewModel());
+
+}
+
 
 function stopAnimation(marker) {
       setTimeout(function () {
         marker.setAnimation(null);
     }, 750);
+}
+
+function errorAlert() {
+  alert("Map did not load!");
 }

@@ -155,7 +155,7 @@ var ViewModel = function() {
 
 self.filter = ko.observable('')
 
-this.filteredItems = ko.computed(function() {
+/*this.filteredItems = ko.computed(function() {
     var filter = this.filter().toLowerCase();
     if (!filter) {
         return this.locationList();
@@ -170,21 +170,25 @@ this.filteredItems = ko.computed(function() {
     }
 }, this);
 
-        ko.utils.stringStartsWith = function (string, startsWith) {
-            string = string || "";
-            if (startsWith.length > string.length)
-                return false;
-            return string.substring(0, startsWith.length) === startsWith;
-        },
+
+ko.utils.stringStartsWith = function (string, startsWith) {
+    string = string || "";
+    if (startsWith.length > string.length)
+        return false;
+    return string.substring(0, startsWith.length) === startsWith;
+}*/
+
+
+
 
 self.hidden = ko.observable(false);
 
 
-    self.selectLocation = function(theLocation) {
+    this.selectLocation = function(theLocation) {
+        google.maps.event.trigger(theLocation.marker,'click');
         self.currentLocation(theLocation);
         self.hidden(true);
-    }
-
+}
 
     self.hideList = function() {
         self.hidden(true);
@@ -194,19 +198,11 @@ self.hidden = ko.observable(false);
     self.showList = function() {
         self.hidden(false);
         self.currentLocation('');
+        if (infowindow) {
+            infowindow.close();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter({lat: 42.1342464, lng: -87.7810725});
+
+        }
     }
-
 }
-
-  function loadScript() {
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDDVId7-jJjGL6LwbveKl60DqYi4GEubgs&v=3.exp&' +
-      'callback=initialize';
-        document.body.appendChild(script);
-  }
-
-  window.onload = loadScript;
-
-
-ko.applyBindings(new ViewModel());

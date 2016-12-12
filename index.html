@@ -74,7 +74,6 @@
             <img class="single-pic" src="" alt="Location Picture" data-bind="attr: {src: imgSrc}">
             <div data-bind="text: comment"></div>
             <button data-bind="click: $parent.showList">Show List</button>
-            <!--additional data from yelp or instead of?-->
         </div>
     </div>
 
@@ -91,14 +90,13 @@
     </div> <!--row div-->
 </div> <!--container div-->
 
-<div id="names">
-</div>
-
     <script src="js/lib/knockout-3.4.1.js"></script>
-    <script src="js/app.js" async></script>
+    <script src="js/app.js"></script>
     <script src="js/foursquare.js"></script>
-    <script src="js/map_v3.js" async></script>
-
+    <script src="js/map_v3.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDVId7-jJjGL6LwbveKl60DqYi4GEubgs&v=3.exp&callback=initialize" onerror="errorAlert()">
+    </script>
 
 
 
