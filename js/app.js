@@ -7,10 +7,7 @@ var locations = [
     comment: 'Great place to get high end items on the cheap.',
     imgSrc: 'http://www.placekitten.com/600/300',
     imgAttribution: 'http://www.placekitten.com',
-    searchTerms: [ { term: "shopping" },
-                     { term: "store" },
-                     { term: "budget" },
-                     { term: "bargain" } ],
+    category: "shopping",
     latLon: {lat: 42.118897, lng: -87.745540},
     fSId: '4defd1cc227170314bad2a7a',
     description: ''
@@ -22,7 +19,7 @@ var locations = [
     state: 'IL',
     comment: 'Lovely drive featuring Skokie Lagoons.',
     imgSrc: 'http://www.placekitten.com/500/250',
-    searchTerms: [{ term: 'nature'},{ term: 'beauty'},{ term: 'drive'},{ term: 'bike'}],
+    category: 'drives',
     latLon: {lat: 42.137770, lng: -87.774490},
     fSId: '',
     description: 'Starts at Dundee and Forestway in Glencoe on the north end and winds its way to Tower, then Willow Road. A great way to go north/south on the North Shore.'
@@ -34,7 +31,7 @@ var locations = [
     state: 'IL',
     comment: 'Nice drive if you need to go north/south on the North Shore.',
     imgSrc: 'http://www.placekitten.com/500/250',
-    searchTerms: [{ term: 'nature'},{ term: 'beauty'},{ term: 'drive'}],
+    category: 'drives',
     latLon: {lat: 42.134889, lng: -87.789635},
     fSId: '',
     description: 'Starts at Skokie Boulevard on the north end and goes straight down to Lake Avenue. If you need to continue on to Glenview Road, turn left and then right on Wagner, another pretty road.'
@@ -46,7 +43,7 @@ var locations = [
     state: 'IL',
     comment: 'Great breakfast & lunch sandwiches, gelato, and baked goods. Oh, and coffee!',
     imgSrc: 'images/arrivadolce.jpg',
-    searchTerms: [{ term: 'gelato'},{ term: 'restaurant'},{ term: 'coffee'},{ term: 'tea'},{ term: 'lunch'}],
+    category: 'dining',
     latLon: {lat: 42.185851, lng:  -87.798208},
     fSId: '4df93ea745dd2b6764bb4048',
     description: ''
@@ -58,7 +55,7 @@ var locations = [
     state: 'IL',
     comment: 'Lovely library with lots of activities. Nice kids area.',
     imgSrc: 'http://www.placekitten.com/200/100',
-    searchTerms: [{ term: 'books'},{ term: 'classes'},{ term: 'read'},{ term: 'downtown'}],
+    category: 'public',
     latLon: {lat: 42.184765, lng: -87.796784},
     fSId: '4ab66d3bf964a5200b7720e3',
     description: ''
@@ -70,7 +67,7 @@ var locations = [
     state: 'IL',
     comment: 'Fantastic hall with top-notch talent right on the lakefront.',
     imgSrc: 'images/banner_pickstaiger1.jpg',
-    searchTerms: [{ term: 'arts'},{ term: 'music'},{ term: 'entertainment'},{ term: 'northwestern'}],
+    category: 'entertainment',
     latLon: {lat: 42.052856, lng: -87.672195},
     fSId: '4b5475c7f964a5200ebc27e3',
     description: ''
@@ -82,7 +79,7 @@ var locations = [
     state: 'IL',
     comment: 'Delicious Thai & Japanese food in an adorable restaurant. Bento box lunches.',
     imgSrc: 'http://www.placekitten.com/150/75',
-    searchTerms: [{ term: 'thai'},{ term: 'japanese'},{ term: 'restaurant'},{ term: 'bento'}],
+    category: 'dining',
     latLon: {lat: 42.076672, lng: -87.705205},
     fSId: '4fe6587fe4b0af2e67710fc6',
     description: ''
@@ -102,9 +99,7 @@ var singleLocation = function(data) {
     this.latLon = ko.observable('{lat: ' + data.latLon.lat + ', lng: ' + data.latLon.lng + '}');
     this.fSId = data.fSId;
     this.description = data.description;
-    this.searchTerms = ko.computed(function() {
-        data.searchTerms.join();
-    })
+    this.category = data.category;
     this.marker = data.marker;
 
 

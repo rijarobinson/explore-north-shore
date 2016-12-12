@@ -24,9 +24,6 @@ var infowindow;
 
 function setUpMarkers() {
 
-/* Would like to style markers by category (e.g. restaurant, entertainment, nature). Would prefer
-to do using the dataset rather than getting elements from DOM. So wait post-appt*/
-
 /*storing new information in locations dataset*/
 
 locations.forEach(function(location) {
@@ -70,19 +67,44 @@ locations.forEach(function(location) {
     }
 
 /*create the markers and set infowindow content*/
-      var marker, i;
+
+/* TDO DO: If I click on a marker and detail is shown at left either show list or switch to detail on clicked marker */
+      var marker, category, markerColor;
+
+      category = location.category;
+
+      var markerImageURL = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|";
+
+      if (category == 'entertainment') {
+        markerColor = "cc33ff"
+      }
+      else if (category == 'dining') {
+        markerColor = "0000ff"
+      }
+      else if (category == 'drives') {
+        markerColor = "006666"
+      }
+      else if (category == 'public') {
+        markerColor = "ffccff"
+      }
+      else {
+        markerColor = "00ff99"
+      }
+
+      var markerImage = new google.maps.MarkerImage(markerImageURL + markerColor);
 
       marker = new google.maps.Marker({
           animation: google.maps.Animation.DROP,
           position: location.latLon,
           map: map,
+          icon: markerImage
         });
 
       marker.fSId = location.fSId;
       marker.linkText = location.linkToVenue;
 
 
-      google.maps.event.addListener(marker, 'click', (function(location, i) {
+      google.maps.event.addListener(marker, 'click', (function(location) {
         return function() {
           var content;
           marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -101,7 +123,7 @@ locations.forEach(function(location) {
           infowindow.setContent(content);
           infowindow.open(map, marker);
         }
-      })(location, i));
+      })(location));
 
 
     location.marker = marker;
