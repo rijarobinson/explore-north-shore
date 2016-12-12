@@ -1,6 +1,3 @@
-/*active markers are stored in an array. Will use this if I decide to delete markers
-upon placing searched markers. If not, I don't need array.*/
-var markers = [];
 var map;
 var infowindow;
 
@@ -23,13 +20,6 @@ var infowindow;
 
     infowindow = new google.maps.InfoWindow();
     setUpMarkers();
-/* APPOINTMENT: I don't want to have to initialize the map everytime I update the markers.
-I know I can delete markers and reset them, but I also want to initialize the map once
-and only update the markers when locationList changes. I also think this is related to
-the order of the files in Index.html. I want to initialize the map upon load, then make a call to
-setUpMarkers from app.js when I want to update the markers, passing in the map and preferable the
-locationList so I don't have to get elements from the DOM*/
-
 }
 
 function setUpMarkers() {
@@ -37,34 +27,8 @@ function setUpMarkers() {
 /* Would like to style markers by category (e.g. restaurant, entertainment, nature). Would prefer
 to do using the dataset rather than getting elements from DOM. So wait post-appt*/
 
-/*    var latLng = document.getElementById('location-list').getElementsByClassName("location-latLon");
-    var imageList = document.getElementById('location-list').getElementsByClassName("location-picture");
-    var comments = document.getElementById('location-list').getElementsByClassName("location-comment");
-    var fSIdList = document.getElementById('location-list').getElementsByClassName("location-fsid");
-    var descriptions = document.getElementById('location-list').getElementsByClassName("location-description");
-
-
-    for (i = 0; i < latLng.length; i++) {
-
-      var position = latLng[i].innerHTML;
-      var latLongStrip = position.replace("{lat: ","").replace("lng: ","").replace("}","");
-      var latlngSplit = latLongStrip.split(',');
-
-      var lat = (parseFloat(latlngSplit[0]));
-      var lng = (parseFloat(latlngSplit[1]));
-
-      var image = imageList[i].src;
-      var comment = comments[i].innerHTML;
-
-      var fSId = fSIdList[i].innerHTML;
-
-      var description = descriptions[i].innerHTML;
-
-      var tips = '';
-      var name = '';
-*/
-
 /*storing new information in locations dataset*/
+
 locations.forEach(function(location) {
       location.linkToVenue = 'https://foursquare.com/v/' + location.fSId;
 
@@ -105,6 +69,7 @@ locations.forEach(function(location) {
 
     }
 
+/*create the markers and set infowindow content*/
       var marker, i;
 
       marker = new google.maps.Marker({
@@ -113,10 +78,8 @@ locations.forEach(function(location) {
           map: map,
         });
 
-      /*pull these properties out of location*/
       marker.fSId = location.fSId;
       marker.linkText = location.linkToVenue;
-      markers.push(marker);
 
 
       google.maps.event.addListener(marker, 'click', (function(location, i) {
@@ -142,23 +105,11 @@ locations.forEach(function(location) {
 
 
     location.marker = marker;
-
-/*
-      google.maps.event.addListener(marker, 'click', (function(location, i) {
-        return function() {
-          if (infowindow) {
-            infowindow.close();
-          }
-          marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
-      })(location, i));
-*/
     })
 
 ko.applyBindings(new ViewModel());
 
 }
-
 
 function stopAnimation(marker) {
       setTimeout(function () {
