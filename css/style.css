@@ -36,10 +36,10 @@ hr {
     padding: 5px;
 }
 
-
-.expand-button {
+.show-list-button {
     display: none;
 }
+
 h5 {
     padding: 0px;
     margin-left: 10px;

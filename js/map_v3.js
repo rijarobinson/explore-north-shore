@@ -1,3 +1,5 @@
+/*active markers are stored in an array. Will use this if I decide to delete markers
+upon placing searched markers. If not, I don't need array.*/
 var markers = [];
 
 
@@ -5,8 +7,6 @@ var markers = [];
 
 
     var center = {lat: 42.1342464, lng: -87.7810725};
-/*    console.log("center: " + center.lat + ", " + center.lng);
-*/
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 11,
       center: center,

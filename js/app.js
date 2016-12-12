@@ -28,6 +28,18 @@ var locations = [
     description: 'Starts at Dundee and Forestway in Glencoe on the north end and winds its way to Tower, then Willow Road. A great way to go north/south on the North Shore.'
     },
     {
+    locationName: 'Sunset Ridge Road',
+    streetAddress: 'Sunset Ridge Road and Skokie Boulevard',
+    city: 'Northbrook',
+    state: 'IL',
+    comment: 'Nice drive if you need to go north/south on the North Shore.',
+    imgSrc: 'http://www.placekitten.com/500/250',
+    searchTerms: [{ term: 'nature'},{ term: 'beauty'},{ term: 'drive'}],
+    latLon: {lat: 42.134889, lng: -87.789635},
+    fSId: '',
+    description: 'Starts at Skokie Boulevard on the north end and goes straight down to Lake Avenue. If you need to continue on to Glenview Road, turn left and then right on Wagner, another pretty road.'
+    },
+    {
     locationName: 'ArrivaDolce',
     streetAddress: '1823 St Johns Ave',
     city: 'Highland Park',
@@ -79,19 +91,24 @@ var locations = [
 
 var singleLocation = function(data) {
 
-    this.locationName = ko.observable(data.locationName);
-    this.streetAddress = ko.observable(data.streetAddress);
-    this.city = ko.observable(data.city);
-    this.state = ko.observable(data.state);
+    this.locationName = data.locationName;
+    this.streetAddress = data.streetAddress;
+    this.city = data.city;
+    this.state = data.state;
     this.fullAddress = ko.computed(function() {
         return data.locationName + '-' + data.streetAddress + '-' + data.city;
     })
-    this.comment = ko.observable(data.comment);
-    this.imgSrc = ko.observable(data.imgSrc);
-    this.imgAttribution = ko.observable(data.imgAttribution);
+    this.comment = data.comment;
+    this.imgSrc = data.imgSrc;
+    this.imgAttribution = data.imgAttribution;
     this.latLon = ko.observable('{lat: ' + data.latLon.lat + ', lng: ' + data.latLon.lng + '}');
-    this.fSId = ko.observable(data.fSId);
-    this.description = ko.observable(data.description);
+    this.fSId = data.fSId;
+    this.description = data.description;
+    this.searchTerms = ko.computed(function() {
+        data.searchTerms.join();
+    })
+    this.marker = data.marker;
+
 
 }
 
@@ -106,63 +123,87 @@ var ViewModel = function() {
     locations.forEach(function(locationItem) {
         self.locationList.push( new singleLocation(locationItem) );
     });
-    /*trying to sort list by city*/
 
-    this.sortedLocationList = ko.computed(function() {
+/*    this.sortedLocationList = ko.computed(function() {
            return self.locationList().sort(function (left, right) {
                 return left.city() == right.city() ?
                      0 :
                      (left.city() < right.city() ? -1 : 1);
            });
-        });
+        });*/
 
 
 
 /*search function*/
-    self.query = ko.observable('')
+/*    self.query = ko.observable('')
 
     self.query.subscribe(function(value) {
         self.locationList.removeAll();
         locations.forEach(function(locationItem) {
-        var searchString = locationItem.locationName + locationItem.streetAddress + locationItem.city;
+        var searchString = locationItem.locationName + locationItem.streetAddress + locationItem.city + locationItem.searchTerms;
             if(searchString.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
                 self.locationList.push( new singleLocation(locationItem) );
             }
         });
-        /*TODO: figure out how to do this without initializing maps*/
-        initialize();
+        /*TODO: figure out how to do this without initializing maps, just place the markers (preferably
+            from locationList*/
+/*        initialize();
         })
+*/
 
-    this.selectLocation = function(theLocation) {
+/*filter is not currently doing anything--try after making other changes.*/
+
+self.filter = ko.observable('')
+
+this.filteredItems = ko.computed(function() {
+    var filter = this.filter().toLowerCase();
+    if (!filter) {
+        return this.locationList();
+    } else {
+        console.log("the list is trying to be filtered.");
+        return ko.utils.arrayFilter(this.locationList, function(single) {
+
+        var searchString = single.locationName + single.streetAddress + single.city + single.searchTerms;
+
+            return ko.utils.stringStartsWith(searchString.toLowerCase(), filter);
+        });
+    }
+}, this);
+
+        ko.utils.stringStartsWith = function (string, startsWith) {
+            string = string || "";
+            if (startsWith.length > string.length)
+                return false;
+            return string.substring(0, startsWith.length) === startsWith;
+        },
+
+self.hidden = ko.observable(false);
+
+
+    self.selectLocation = function(theLocation) {
         self.currentLocation(theLocation);
-        $("#location-list").css("display", "none");
-        $(".collapse-button").css("display", "none");
-        $(".expand-button").css("display", "none");
+        self.hidden(true);
     }
 
-    this.hideList = function() {
-        $("#location-list").css("display", "none");
-        $(".collapse-button").css("display", "none");
-        $(".expand-button").css("display", "inline");
+
+    self.hideList = function() {
+        self.hidden(true);
+        console.log("hide list was accessed");
     }
 
-    this.showList = function() {
-        $("#location-list").css("display", "block");
-        $("#location").css("display", "none");
-        $(".expand-button").css("display", "none");
-        $(".collapse-button").css("display", "inline");
-        initialize();
+    self.showList = function() {
+        self.hidden(false);
+        self.currentLocation('');
     }
 
 }
 
-
   function loadScript() {
       var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDDVId7-jJjGL6LwbveKl60DqYi4GEubgs&v=3.exp&' +
+      script.type = 'text/javascript';
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDDVId7-jJjGL6LwbveKl60DqYi4GEubgs&v=3.exp&' +
       'callback=initialize';
-  document.body.appendChild(script);
+        document.body.appendChild(script);
   }
 
   window.onload = loadScript;
