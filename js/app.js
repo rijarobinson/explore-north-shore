@@ -178,13 +178,13 @@ self.hidden = ko.observable(false);
         if (infowindow) {
             infowindow.close();
             google.maps.event.trigger(map, "resize");
-            map.setCenter({lat: 42.127470, lng: -87.766588});
+            map.setCenter({lat: 42.127470, lng: -87.754953});
         }
     }
 
     self.resetMapZoom = function() {
         google.maps.event.trigger(map, "resize");
-        map.setCenter({lat: 42.127470, lng: -87.766588});
+        map.setCenter({lat: 42.127470, lng: -87.754953});
         map.setZoom(11);
     }
 
