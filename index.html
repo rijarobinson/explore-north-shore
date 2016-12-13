@@ -63,9 +63,9 @@
     <div class="col-md-6">
         <div class="list-hidden" data-bind="css: { hide: hidden() ===  false }">Click the Show List button to see the list.</div>
         <div id="location-list" data-bind="foreach: filteredItems, css: { hide: hidden() === true }">
-            <p class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress">
+            <h5 class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress">
+            </h5>
             <hr>
-            </p>
         </div>
 
 
