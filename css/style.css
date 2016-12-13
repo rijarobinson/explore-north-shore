@@ -37,6 +37,11 @@ h2 {
     color: #60C;
 }
 
+button {
+    background-color: #60C;
+    color: #FFF;
+}
+
 h5 {
     padding: 0px;
     margin-left: 10px;
