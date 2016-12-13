@@ -132,8 +132,6 @@ this.locationList().sort(function (left, right) {
 self.filter = ko.observable('')
 self.searching = ko.observable(false);
 
-
-
 this.filteredItems = ko.computed(function() {
     var filter = self.filter().toLowerCase();
     if (!filter) {
@@ -146,6 +144,8 @@ this.filteredItems = ko.computed(function() {
             if (ko.utils.stringIsIn(searchString, filter) === true) {
                 single.marker.setVisible(true);
                 self.searching(true);
+                infowindow.close();
+                map.setCenter({lat: 42.127470, lng: -87.754953});
                 return ko.utils.stringIsIn(searchString, filter);
             }
             else {
