@@ -24,6 +24,10 @@ hr {
     display: none;
 }
 
+.reset-search-button {
+    display: none;
+}
+
 .tiny-text {
     font-size: 7px;
     font-style: italic;

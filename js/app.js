@@ -130,10 +130,14 @@ this.locationList().sort(function (left, right) {
            });
 
 self.filter = ko.observable('')
+self.searching = ko.observable(false);
+
+
 
 this.filteredItems = ko.computed(function() {
     var filter = self.filter().toLowerCase();
     if (!filter) {
+        self.searching(false);
         setAllOnMap();
         return this.locationList()
     } else {
@@ -141,6 +145,7 @@ this.filteredItems = ko.computed(function() {
             var searchString = single.fullAddress.toLowerCase();
             if (ko.utils.stringIsIn(searchString, filter) === true) {
                 single.marker.setVisible(true);
+                self.searching(true);
                 return ko.utils.stringIsIn(searchString, filter);
             }
             else {
@@ -162,6 +167,7 @@ ko.utils.stringIsIn = function(string, isIn) {
 self.hidden = ko.observable(false);
 
 
+
     this.selectLocation = function(theLocation) {
         google.maps.event.trigger(theLocation.marker,'click');
         self.currentLocation(theLocation);
@@ -181,6 +187,13 @@ self.hidden = ko.observable(false);
             map.setCenter({lat: 42.127470, lng: -87.754953});
         }
     }
+
+    self.resetSearch = function() {
+        self.searching(false);
+        self.hidden(false);
+        self.filter('');
+    }
+
 
     self.resetMapZoom = function() {
         google.maps.event.trigger(map, "resize");

@@ -42,22 +42,27 @@
         <div class="col-md-4">
 
         <input placeholder="Search..." data-bind="value: filter, valueUpdate: 'afterkeydown'" />
-        <!--maybe a categories dropdown here?-->
+        <!--TODO: maybe a categories dropdown here?-->
 </div>
 </div>
 
-<div class="row">
-<div class="col-md-4">
-
+<div class="row add-padding">
+<div class="col-md-1">
     <button class="hide-list-button btn" data-bind="click: hideList, css: { hide: hidden() === true }">Hide List</button>
 </div>
-</div>
 
-<div class="row">
-<div class="col-md-4">
+<div class="col-md-1">
     <button class="show-list-button btn" data-bind="click: showList, css: { show: hidden() === true }">Show List</button>
 </div>
+<div class="col-md-1">
+    <button class="reset-search-button btn" data-bind="click: resetSearch, css: { show: searching() === true }">Reset Search</button>
+</div>
+
+
     </div>
+
+
+
 
 <div class="row">
     <div class="col-md-4">
