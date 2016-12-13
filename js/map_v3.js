@@ -73,7 +73,7 @@ locations.forEach(function(location) {
 
       category = location.category;
 
-      var markerImageURL = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|";
+      var markerImageURL = "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|";
 
       if (category == 'entertainment') {
         markerColor = "cc33ff"
@@ -110,15 +110,26 @@ locations.forEach(function(location) {
           marker.setAnimation(google.maps.Animation.BOUNCE);
           stopAnimation(marker);
           if (marker.fSId) {
-            content = '<div class="text-right"><img src="images/foursquare.png" style="width: 100px;"></div>' +
-                      '<div class="add-padding"><a href="' + location.linkText + '"><span class="add-padding">' +
-                      '<img src="' + location.imgSrc + '"style="width: 50px;"></span>' +
-                      location.name + '</div></a><div class="add-padding">Tips from FOURSQUARE<br>' + location.tips + '</div></div>';
+            content = '<div class="container" style="width: 100%"><div class="row"><div class="col-md-12"><div class="text-right">' +
+                      '<img src="images/foursquare.png" style="width: 100px;">' +
+                      '</div></div></div>' +
+                      '<div class="row"><div class="col-md-1">' +
+                      '<img src="' + location.imgSrc + '"style="width: 50px;">' +
+                      '</div><div class="col-md-1"></div><div class="col-md-9">' +
+                      '<a href="' + location.linkText + '">' + location.name +
+                      '</a><br>' + location.category + '</div></div>' +
+                      '<div class="row"><div class="col-md-12">' +
+                      '<div class="add-padding">Tips from FOURSQUARE<br>' + location.tips + '</div></div></div></div>';
           }
           else {
-            content = '<div class="text-right">No FOURSQUARE listing for this item.</div><span class="add-padding">' +
-            '<img src="' + location.imgSrc + '"style="width: 50px;"></span><span class="add-padding">' +
-            location.name + '</span></a><div class="add-padding">' + location.tips + '</div></div>';
+            content = '<div class="container" style="width: 100%"><div class="row"><div class="col-md-12">' +
+                      '<div class="text-right">No FOURSQUARE listing for this item.</div></div></div>' +
+                      '<div class="row"><div class="col-md-1">' +
+                      '<img src="' + location.imgSrc + '"style="width: 50px;">' +
+                      '</div><div class="col-md-1"></div><div class="col-md-9">' +
+                      location.name + '<br>' + location.category + '</div></div>' +
+                      '<div class="row"><div class="col-md-12">' +
+                      '<div class="add-padding">' + location.tips + '</div></div></div></div>';
           }
           infowindow.setContent(content);
           infowindow.open(map, marker);
