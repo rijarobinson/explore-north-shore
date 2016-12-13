@@ -28,6 +28,7 @@ function setUpMarkers() {
 
 locations.forEach(function(location) {
       location.linkToVenue = 'https://foursquare.com/v/' + location.fSId;
+      console.log("linkToVenue: " + location.linkToVenue);
 
     var fsRequestTimeout = setTimeout(function() {
         tips = "There was a problem with getting the foursquare data.";
@@ -101,7 +102,6 @@ locations.forEach(function(location) {
         });
 
       marker.fSId = location.fSId;
-      marker.linkText = location.linkToVenue;
 
 
       google.maps.event.addListener(marker, 'click', (function(location) {
@@ -116,7 +116,7 @@ locations.forEach(function(location) {
                       '<div class="row"><div class="col-md-1">' +
                       '<img src="' + location.imgSrc + '"style="width: 50px;">' +
                       '</div><div class="col-md-1"></div><div class="col-md-9">' +
-                      '<a href="' + location.linkText + '">' + location.name +
+                      '<a href="' + location.linkToVenue + '">' + location.name +
                       '</a><br>' + location.category + '</div></div>' +
                       '<div class="row"><div class="col-md-12">' +
                       '<div class="add-padding">Tips from FOURSQUARE<br>' + location.tips + '</div></div></div></div>';
