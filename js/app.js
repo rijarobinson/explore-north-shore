@@ -92,7 +92,7 @@ var singleLocation = function(data) {
     this.streetAddress = data.streetAddress;
     this.city = data.city;
     this.state = data.state;
-    this.fullAddress = data.locationName + '-' + data.streetAddress + '-' + data.city;
+    this.fullAddress = data.locationName + '-' + data.city;
     this.comment = data.comment;
     this.imgSrc = data.imgSrc;
     this.imgAttribution = data.imgAttribution;
@@ -172,7 +172,7 @@ self.hidden = ko.observable(false);
         if (infowindow) {
             infowindow.close();
             google.maps.event.trigger(map, "resize");
-            map.setCenter({lat: 42.1342464, lng: -87.7810725});
+            map.setCenter({lat: 42.127470, lng: -87.766588});
         }
     }
 }

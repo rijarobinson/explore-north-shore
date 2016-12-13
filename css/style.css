@@ -1,6 +1,6 @@
 hr {
     padding: 0px;
-    margin: 10px;
+    margin: 5px;
 }
 
 #location-list {
@@ -29,3 +29,12 @@ h5 {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+p {
+    padding: 0px;
+    margin: 0px;
+}
+
+h6 {
+    margin-top: 0px;
+    }
