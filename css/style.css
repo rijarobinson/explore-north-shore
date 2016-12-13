@@ -24,6 +24,12 @@ hr {
     display: none;
 }
 
+.tiny-text {
+    font-size: 7px;
+    font-style: italic;
+}
+
+
 h5 {
     padding: 0px;
     margin-left: 10px;
@@ -33,6 +39,10 @@ h5 {
 p {
     padding: 0px;
     margin: 0px;
+}
+
+.pad-top {
+    padding-top: 10px;
 }
 
 h6 {

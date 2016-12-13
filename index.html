@@ -47,15 +47,15 @@
 </div>
 
 <div class="row">
-<div class="col-md-6 text-right">
+<div class="col-md-6">
 
-    <button class="hide-list-button" data-bind="click: hideList, css: { hide: hidden() === true }">Hide List</button>
+    <button class="hide-list-button btn" data-bind="click: hideList, css: { hide: hidden() === true }">Hide List</button>
 </div>
 </div>
 
 <div class="row">
-<div class="col-md-6 text-right">
-    <button class="show-list-button" data-bind="click: showList, css: { show: hidden() === true }">Show List</button>
+<div class="col-md-6">
+    <button class="show-list-button btn" data-bind="click: showList, css: { show: hidden() === true }">Show List</button>
 </div>
     </div>
 
@@ -73,11 +73,13 @@
 
     <div data-bind="with: currentLocation">
         <div id="location">
+            <a class="fs-link" href="" data-bind="attr: { href: linkToVenue }">
             <h3 data-bind="text: locationName"></h3>
+        </a>
             <h4><span data-bind="text: streetAddress"></span>, <span data-bind="text: city"></span></h4>
             <img class="single-pic" src="" alt="Location Picture" data-bind="attr: {src: imgSrc}">
             <div data-bind="text: comment"></div>
-            <button data-bind="click: $parent.showList">Show List</button>
+            <button class="btn" data-bind="click: $parent.showList">Show List</button>
         </div>
     </div>
 
@@ -87,9 +89,11 @@
 
 
         <div class="col-md-6">
-            <div id="map" style="height: 350px; width: 90%;">
+            <div id="map" style="height: 350px; width: 100%;">
                 Map not available-check address of site or internet connection.
             </div>
+            <button class="btn" data-bind="click: resetMapZoom">Reset Map Zoom</button>
+
         </div> <!--col div-->
     </div> <!--row div-->
 </div> <!--container div-->

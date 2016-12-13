@@ -96,8 +96,15 @@ var singleLocation = function(data) {
     this.comment = data.comment;
     this.imgSrc = data.imgSrc;
     this.imgAttribution = data.imgAttribution;
-    this.latLon = ko.observable('{lat: ' + data.latLon.lat + ', lng: ' + data.latLon.lng + '}');
+    this.latLon = data.latLon;
     this.fSId = data.fSId;
+    if (data.fSId) {
+    this.linkToVenue = "https://www.foursquare.com/v/" + data.fSId;
+    }
+    else {
+        this.linkToVenue = "https://maps.google.com/maps?q=" + data.latLon.lat + ", " + data.latLon.lng;
+    }
+
     this.description = data.description;
     this.category = data.category;
     this.marker = data.marker;
@@ -174,6 +181,13 @@ self.hidden = ko.observable(false);
             map.setCenter({lat: 42.127470, lng: -87.766588});
         }
     }
+
+    self.resetMapZoom = function() {
+        google.maps.event.trigger(map, "resize");
+        map.setCenter({lat: 42.127470, lng: -87.766588});
+        map.setZoom(11);
+    }
+
 }
 
 function setAllOnMap() {

@@ -18,7 +18,9 @@ var infowindow;
     map.setCenter(newCenter);
         });
 
-    infowindow = new google.maps.InfoWindow();
+    infowindow = new google.maps.InfoWindow({
+      minWidth: 300,
+      maxWidth: 300 });
     setUpMarkers();
 }
 
@@ -26,9 +28,16 @@ function setUpMarkers() {
 
 /*storing new information in locations dataset*/
 
+
+  var styleInfoWinA = '<div class="container" style="width: 100%"><div class="row"><div class="col-md-12"><div class="text-right">';
+  var styleInfoWinB = '</div></div></div><div class="row"><div class="col-md-2"><img src="';
+  var styleInfoWinC = '" style="max-width: 75px; min-width: 75px;"></div><div class="col-md-2"></div><div class="col-md-8 pad-top">';
+  var styleInfoWinD = '</div></div><div class="row"><div class="col-md-12"><div class="add-padding">';
+  var styleInfoWinE = '</div></div></div></div>';
+
+
 locations.forEach(function(location) {
       location.linkToVenue = 'https://foursquare.com/v/' + location.fSId;
-      console.log("linkToVenue: " + location.linkToVenue);
 
     var fsRequestTimeout = setTimeout(function() {
         tips = "There was a problem with getting the foursquare data.";
@@ -36,7 +45,7 @@ locations.forEach(function(location) {
 
     if(location.fSId == '') {
       location.tips = location.description;
-      location.name = 'another source for name';
+      location.name = location.locationName;
     }
     else {
       $.ajax({
@@ -103,33 +112,25 @@ locations.forEach(function(location) {
 
       marker.fSId = location.fSId;
 
-
       google.maps.event.addListener(marker, 'click', (function(location) {
         return function() {
           var content;
           marker.setAnimation(google.maps.Animation.BOUNCE);
           stopAnimation(marker);
           if (marker.fSId) {
-            content = '<div class="container" style="width: 100%"><div class="row"><div class="col-md-12"><div class="text-right">' +
-                      '<img src="images/foursquare.png" style="width: 100px;">' +
-                      '</div></div></div>' +
-                      '<div class="row"><div class="col-md-1">' +
-                      '<img src="' + location.imgSrc + '"style="width: 50px;">' +
-                      '</div><div class="col-md-1"></div><div class="col-md-9">' +
-                      '<a href="' + location.linkToVenue + '">' + location.name +
-                      '</a><br>' + location.category + '</div></div>' +
-                      '<div class="row"><div class="col-md-12">' +
-                      '<div class="add-padding">Tips from FOURSQUARE<br>' + location.tips + '</div></div></div></div>';
+            content = styleInfoWinA +
+                      '<img src="images/foursquare.png" style="width: 100px;">' + styleInfoWinB + location.imgSrc +
+                       styleInfoWinC + '<a href="' + location.linkToVenue + '">' + location.name +
+                      '</a><br>' + location.category +
+                      styleInfoWinD + 'Tips from FOURSQUARE<br>' + location.tips +
+                      styleInfoWinE;
           }
           else {
-            content = '<div class="container" style="width: 100%"><div class="row"><div class="col-md-12">' +
-                      '<div class="text-right">No FOURSQUARE listing for this item.</div></div></div>' +
-                      '<div class="row"><div class="col-md-1">' +
-                      '<img src="' + location.imgSrc + '"style="width: 50px;">' +
-                      '</div><div class="col-md-1"></div><div class="col-md-9">' +
-                      location.name + '<br>' + location.category + '</div></div>' +
-                      '<div class="row"><div class="col-md-12">' +
-                      '<div class="add-padding">' + location.tips + '</div></div></div></div>';
+            content = styleInfoWinA + '<div class="tiny-text">No FOURSQUARE listing for this item.</div>' + styleInfoWinB + location.imgSrc +
+                      styleInfoWinC +
+                      location.name + '<br>' + location.category +
+                      styleInfoWinD + location.tips +
+                      styleInfoWinE;
           }
           infowindow.setContent(content);
           infowindow.open(map, marker);
