@@ -45,20 +45,28 @@
         <!--maybe a categories dropdown here?-->
 </div>
 </div>
+
 <div class="row">
-<div class="col-md-6">
+<div class="col-md-6 text-right">
 
+    <button class="hide-list-button" data-bind="click: hideList, css: { hide: hidden() === true }">Hide List</button>
+</div>
+</div>
 
+<div class="row">
+<div class="col-md-6 text-right">
+    <button class="show-list-button" data-bind="click: showList, css: { show: hidden() === true }">Show List</button>
+</div>
+    </div>
 
-<button class="hide-list-button" data-bind="click: hideList, css: { hide: hidden() === true }">Hide List</button>
-<button class="show-list-button" data-bind="click: showList, css: { show: hidden() === true }">Show List</button>
-
-    <span id="location-list" data-bind="foreach: filteredItems, css: { hide: hidden() === true }">
-        <p class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress"></p>
-        </span>
-         <hr>
-    </span>
-
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-hidden" data-bind="css: { hide: hidden() ===  false }">Click the Show List button to see the list.</div>
+        <div id="location-list" data-bind="foreach: filteredItems, css: { hide: hidden() === true }">
+            <p class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress">
+            <hr>
+            </p>
+        </div>
     <div data-bind="with: currentLocation">
         <div id="location">
             <h3 data-bind="text: locationName"></h3>
@@ -83,7 +91,6 @@
 </div> <!--container div-->
 
     <script src="js/app.js"></script>
-    <script src="js/foursquare.js"></script>
     <script src="js/map_v3.js"></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDVId7-jJjGL6LwbveKl60DqYi4GEubgs&v=3.exp&callback=initialize" onerror="errorAlert()">

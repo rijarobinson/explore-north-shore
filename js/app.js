@@ -163,7 +163,6 @@ self.hidden = ko.observable(false);
 
     self.hideList = function() {
         self.hidden(true);
-        console.log("hide list was accessed");
     }
 
     self.showList = function() {
