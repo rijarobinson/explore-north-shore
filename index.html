@@ -22,6 +22,8 @@
 
 <div class="container">
 
+
+
     <div class="row">
         <div class="col-md-12">
             <h2>
@@ -38,12 +40,19 @@
         </div>
     </div>
 
+
+<!--hide elements until the map load is successful-->
+<div style="display: none;" data-bind="visible: true">
+
+
     <div class="row">
         <div class="col-md-4">
 
         <input placeholder="Search..." data-bind="value: filter, valueUpdate: 'afterkeydown'" />
         <!--TODO: maybe a categories dropdown here?-->
 </div>
+
+
 </div>
 
 <div class="row add-padding">
@@ -62,17 +71,21 @@
     </div>
 
 
+</div>
+
 
 
 <div class="row">
     <div class="col-md-4">
+                    <!--hide these elements while map is loading-->
+
+<div style="display: none;" data-bind="visible: true">
         <div class="list-hidden" data-bind="css: { hide: hidden() ===  false }">Click the Show List button to see the list.</div>
         <div id="location-list" data-bind="foreach: filteredItems, css: { hide: hidden() === true }">
             <h5 class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress">
             </h5>
             <hr>
         </div>
-
 
 
 
@@ -87,17 +100,22 @@
             <button class="btn" data-bind="click: $parent.showList">Show List</button>
         </div>
     </div>
-
-
-
 </div>
 
-
+</div>
         <div class="col-md-8">
+
+
             <div id="map" style="height: 350px; width: 100%;">
-                Map not available-check address of site or internet connection.
+                <h2>Site loading...</h2>
             </div>
+
+            <!--hide the button while map is loading-->
+            <div style="display: none;" data-bind="visible: true">
+
             <button class="btn" data-bind="click: resetMapZoom">Reset Map Zoom</button>
+
+        </div>
 
         </div> <!--col div-->
     </div> <!--row div-->
@@ -106,7 +124,7 @@
     <script src="js/app.js"></script>
     <script src="js/map_v3.js"></script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDVId7-jJjGL6LwbveKl60DqYi4GEubgs&v=3.exp&callback=initialize" onerror="errorAlert()">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDVId7-jJjGL6LwbveKl60DqYi4GEubgs&v=3.exp&callback=initialize " onerror="errorAlert()">
     </script>
 
 

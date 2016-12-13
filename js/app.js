@@ -113,7 +113,11 @@ var singleLocation = function(data) {
 }
 
 var ViewModel = function() {
+
     var self = this;
+
+
+    this.mapStatus = ko.observable('Loading map...');
 
     this.locationList = ko.observableArray([]);
 
@@ -129,7 +133,8 @@ this.locationList().sort(function (left, right) {
                      (left.city < right.city ? -1 : 1);
            });
 
-self.filter = ko.observable('')
+
+self.filter = ko.observable('');
 self.searching = ko.observable(false);
 
 this.filteredItems = ko.computed(function() {
@@ -208,3 +213,4 @@ function setAllOnMap() {
         locationItem.marker.setVisible(true);
     });
 }
+

@@ -60,8 +60,8 @@ locations.forEach(function(location) {
             location.tips = "There was a problem with getting the foursquare data";
           },
       });
-            $.ajax({
-          url: "https://api.foursquare.com/v2/venues/" + location.fSId + "?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
+/*            $.ajax({
+          url: "https://api.foursuare.com/v2/venues/" + location.fSId + "?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
           dataType: 'json',
           success: function(data) {
             returnedName = JSON.stringify(data.response["venue"]['name']);
@@ -73,7 +73,7 @@ locations.forEach(function(location) {
             location.tips = "There was a problem with getting the foursquare data";
           },
       });
-
+*/
     }
 
 /*create the markers and set infowindow content*/
@@ -120,7 +120,7 @@ locations.forEach(function(location) {
           if (marker.fSId) {
             content = styleInfoWinA +
                       '<img src="images/foursquare.png" style="width: 100px;">' + styleInfoWinB + location.imgSrc +
-                       styleInfoWinC + '<a href="' + location.linkToVenue + '">' + location.name +
+                       styleInfoWinC + '<a href="' + location.linkToVenue + '">' + location.locationName +
                       '</a><br>' + location.category +
                       styleInfoWinD + 'Tips from FOURSQUARE<br>' + location.tips +
                       styleInfoWinE;
@@ -128,7 +128,7 @@ locations.forEach(function(location) {
           else {
             content = styleInfoWinA + '<div class="tiny-text">No FOURSQUARE listing for this item.</div>' + styleInfoWinB + location.imgSrc +
                       styleInfoWinC +
-                      location.name + '<br>' + location.category +
+                      location.locationName + '<br>' + location.category +
                       styleInfoWinD + location.tips +
                       styleInfoWinE;
           }
@@ -152,5 +152,5 @@ function stopAnimation(marker) {
 }
 
 function errorAlert() {
-  alert("Map did not load!");
+  $("#map").children("h2").text("Error loading map. Check your internet connection or speak to the website owner.")
 }
