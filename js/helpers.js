@@ -9,10 +9,13 @@ function errorAlert() {
 }
 
 function getPinURL(category) {
-    console.log(category);
-    console.log(categories.category);
-/*  pseudocode:
-    where category == categories.category;
-    return categories.markerURL;
-*/
+    var categoryMarkerURL;
+    categories.forEach(function( singleCategory )
+    {
+        if (category == singleCategory.category) {
+            categoryMarkerURL = singleCategory.markerURL;
+        }
+    });
+    return categoryMarkerURL;
 }
+

@@ -70,29 +70,7 @@ locations.forEach(function(location) {
       category = location.category;
 
 
-/*building this function in helpers.js*/
-
-      getPinURL(category);
-
-      var markerImageURL = "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|";
-
-      if (category == 'Entertainment') {
-        markerColor = "cc33ff"
-      }
-      else if (category == 'Dining') {
-        markerColor = "0000ff"
-      }
-      else if (category == 'Drives') {
-        markerColor = "006666"
-      }
-      else if (category == 'Public') {
-        markerColor = "ffccff"
-      }
-      else {
-        markerColor = "00ff99"
-      }
-
-      var markerImage = new google.maps.MarkerImage(markerImageURL + markerColor);
+      var markerImage = new google.maps.MarkerImage(getPinURL(category));
 
       marker = new google.maps.Marker({
           animation: google.maps.Animation.DROP,
