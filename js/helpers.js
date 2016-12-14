@@ -19,3 +19,11 @@ function getPinURL(category) {
     return categoryMarkerURL;
 }
 
+function stringIsIn(string, isIn) {
+    string = string || "";
+    if (isIn.length > string.length)
+        return false;
+    return string.indexOf(isIn) >= 0;
+}
+
+
