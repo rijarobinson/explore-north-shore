@@ -60,20 +60,6 @@ locations.forEach(function(location) {
             location.tips = "There was a problem with getting the foursquare data";
           },
       });
-/*            $.ajax({
-          url: "https://api.foursuare.com/v2/venues/" + location.fSId + "?limit=10&sort=recent&client_id=PVIQJ5PWWLE3UMRRNDZ3X1SWVFEHIXNRH12HCXEF0D0J5GOQ&client_secret=YJ0TST4PGCM41UPONGMIEW2ZKOP04XAX2SJSMXGYI3DYMTEU&v=20161209",
-          dataType: 'json',
-          success: function(data) {
-            returnedName = JSON.stringify(data.response["venue"]['name']);
-            location.name = returnedName.replace(/\"/g,"");
-
-            clearTimeout(fsRequestTimeout);
-          },
-          error: function() {
-            location.tips = "There was a problem with getting the foursquare data";
-          },
-      });
-*/
     }
 
 /*create the markers and set infowindow content*/
@@ -85,16 +71,16 @@ locations.forEach(function(location) {
 
       var markerImageURL = "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|";
 
-      if (category == 'entertainment') {
+      if (category == 'Entertainment') {
         markerColor = "cc33ff"
       }
-      else if (category == 'dining') {
+      else if (category == 'Dining') {
         markerColor = "0000ff"
       }
-      else if (category == 'drives') {
+      else if (category == 'Drives') {
         markerColor = "006666"
       }
-      else if (category == 'public') {
+      else if (category == 'Public') {
         markerColor = "ffccff"
       }
       else {

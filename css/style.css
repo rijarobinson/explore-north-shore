@@ -1,3 +1,17 @@
+h2 {
+    color: #60C;
+}
+
+h5 {
+    padding: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+h6 {
+    margin-top: 0px;
+    }
+
 hr {
     padding: 0px;
     margin: 5px;
@@ -20,6 +34,11 @@ hr {
     padding: 5px;
 }
 
+button {
+    background-color: #60C;
+    color: #FFF;
+}
+
 .show-list-button {
     display: none;
 }
@@ -33,30 +52,11 @@ hr {
     font-style: italic;
 }
 
-h2 {
-    color: #60C;
-}
-
-button {
-    background-color: #60C;
-    color: #FFF;
-}
-
-h5 {
-    padding: 0px;
-    margin-left: 10px;
-    margin-right: 10px;
+.pad-top {
+    padding-top: 10px;
 }
 
 p {
     padding: 0px;
     margin: 0px;
 }
-
-.pad-top {
-    padding-top: 10px;
-}
-
-h6 {
-    margin-top: 0px;
-    }
