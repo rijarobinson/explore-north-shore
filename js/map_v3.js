@@ -64,10 +64,15 @@ locations.forEach(function(location) {
 
 /*create the markers and set infowindow content*/
 
-/* TDO DO: If I click on a marker and detail is shown at left either show list or switch to detail on clicked marker */
+/* TODO: If I click on a marker and detail is shown at left either show list or switch to detail on clicked marker */
       var marker, category, markerColor;
 
       category = location.category;
+
+
+/*building this function in helpers.js*/
+
+      getPinURL(category);
 
       var markerImageURL = "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|";
 

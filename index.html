@@ -31,26 +31,26 @@
                 <div class="col-md-4">
                     <input placeholder="Search..." data-bind="value: filter, valueUpdate: 'afterkeydown'" />
                     <!--TODO: maybe a categories dropdown here?-->
+                        <div class="add-padding">
+                            <button class="hide-list-button btn" data-bind="click: hideList, css: { hide: hidden() === true }">
+                                Hide List
+                            </button>
+                            <button class="show-list-button btn" data-bind="click: showList, css: { show: hidden() === true }">
+                                Show List
+                            </button>
+                            <button class="reset-search-button btn" data-bind="click: resetSearch, css: { show: searching() === true }">
+                                Reset Search
+                            </button>
+                        </div>
                 </div>
                 <div class="col-md-8">
                     <div id="category-list" data-bind="foreach: categoryList">
                         <div class="col-md-4">
-                            <span class="category" data-bind="text: $data"></span>
+                            <!--TODO: enhancement-make these clickable to filter-->
+                            <img class="category-marker" src="" alt="Marker Picture" data-bind="attr: {src: markerURL}">
+                            <span class="category" data-bind="text: category"></span>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row add-padding">
-                <div class="col-md-4">
-                    <button class="hide-list-button btn" data-bind="click: hideList, css: { hide: hidden() === true }">
-                        Hide List
-                    </button>
-                    <button class="show-list-button btn" data-bind="click: showList, css: { show: hidden() === true }">
-                        Show List
-                    </button>
-                    <button class="reset-search-button btn" data-bind="click: resetSearch, css: { show: searching() === true }">
-                        Reset Search
-                    </button>
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@
         </div> <!--row div-->
     </div> <!--container div-->
 
-        <script type="text/javascript" src="js/errors.js"></script>
+        <script type="text/javascript" src="js/helpers.js"></script>
         <script src="js/lib/jquery-3.1.1.min.js" onerror="otherError()" type="text/javascript"></script>
         <script src="https://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" onerror="otherError()"></script>
         <script type="text/javascript" src="js/lib/knockout-3.4.1.js" onerror="otherError()"></script>

@@ -86,6 +86,25 @@ var locations = [
     },
 ];
 
+var categories = [
+    {
+    category: "Dining",
+    markerURL: "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|0000ff"},
+    {category: "Drives",
+    markerURL: "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|006666"},
+    {category: "Entertainment",
+    markerURL: "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|cc33ff"},
+    {category: "Public",
+    markerURL: "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|ffccff"},
+    {category: "Shopping",
+    markerURL: "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00ff99"}
+];
+
+var singleCategory = function(data) {
+    this.category = data.category;
+    this.markerURL = data.markerURL;
+};
+
 var singleLocation = function(data) {
     this.locationName = data.locationName;
     this.streetAddress = data.streetAddress;
@@ -120,8 +139,11 @@ var ViewModel = function() {
         self.locationList.push( new singleLocation(locationItem) );
     });
 
+    this.categoryList = ko.observableArray([]);
 
-    this.categoryList = ko.observableArray(["Dining","Drives","Entertainment","Public","Shopping"]);
+    categories.forEach(function(category) {
+        self.categoryList.push( new singleCategory(category) );
+    });
 
 
 this.locationList().sort(function (left, right) {
