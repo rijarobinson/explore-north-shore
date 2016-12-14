@@ -151,6 +151,3 @@ function stopAnimation(marker) {
     }, 750);
 }
 
-function errorAlert() {
-  $("#map").children("h2").text("Error loading map. Check your internet connection or speak to the website owner.")
-}
