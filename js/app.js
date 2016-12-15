@@ -54,7 +54,7 @@ var ViewModel = function() {
             else {
                 return ko.utils.arrayFilter(this.locationList(),
                     function(single) {
-                    console.log("searchString:" + searchString);
+                    searchString = single.category;
                     if (stringIsIn(searchString, categoryFilter) === true) {
                         single.marker.setVisible(true);
                         self.searching(true);
