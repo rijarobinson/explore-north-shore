@@ -5,6 +5,8 @@ var ViewModel = function() {
 
     this.locationList = ko.observableArray([]);
     this.currentLocation = ko.observable( this.locationList()[0] );
+    this.selectedChoice = ko.observable( this.locationList()[0] );
+
 
     locations.forEach(function(locationItem) {
         self.locationList.push( new singleLocation(locationItem) );
@@ -23,6 +25,7 @@ var ViewModel = function() {
     });
 
 /* Add filter features */
+
 
     this.filter = ko.observable("");
     this.searching = ko.observable(false);
@@ -46,12 +49,12 @@ var ViewModel = function() {
             if (!categoryFilter) {
                 self.searching(false);
                 setAllOnMap();
-                return this.locationList()
+                return this.locationList();
             }
             else {
                 return ko.utils.arrayFilter(this.locationList(),
                     function(single) {
-                    searchString = single.category;
+                    console.log("searchString:" + searchString);
                     if (stringIsIn(searchString, categoryFilter) === true) {
                         single.marker.setVisible(true);
                         self.searching(true);
@@ -82,6 +85,9 @@ var ViewModel = function() {
         }
     }, this);
 
+
+
+
 /* Hide/show elements */
 
     this.hidden = ko.observable(false);
@@ -94,6 +100,11 @@ var ViewModel = function() {
         self.currentLocation(theLocation);
         self.hidden(true);
     }
+
+    self.selectedChoice.subscribe(function(theLocation) {
+        google.maps.event.trigger(theLocation.marker,"click");
+        self.currentLocation(theLocation);
+    });
 
     self.hideList = function() {
         self.hidden(true);

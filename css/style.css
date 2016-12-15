@@ -17,21 +17,30 @@ hr {
     margin: 0px;
 }
 
+.search-bar {
+    background-color: #60C;
+}
+
 #map {
     height: 350px;
     width: 100%;
     border: 3px solid #60C;
 }
 
-#location-list {
+#location-list-lg {
     padding: 0px;
 }
 
-.location-item {
+.location-item-lg {
     padding: 3px;
 }
 
-.location-item:hover {
+.location-item-lg {
+    padding: 0px;
+}
+
+.location-item-lg:hover
+.location-item-sm:hover {
     background-color: #FCF;
     border-radius: 5px;
 }
@@ -78,6 +87,10 @@ button {
 
 .show-list-button {
     display: none;
+}
+
+.hide-list-button.hidden-xs {
+    display: inline;
 }
 
 .reset-search-button {

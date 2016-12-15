@@ -11,14 +11,14 @@
     </head>
     <body>
         <div class="container">
-            <div class="row">
+            <div class="row hidden-xs">
                 <div class="col-md-12">
                     <h2>
                         Explore the North Shore!
                     </h2>
                 </div>
             </div>
-            <div class="row">
+            <div class="row hidden-xs">
                 <div class="col-md-12">
                     <h5>
                         My favorite places to go on Chicago's North Shore
@@ -29,49 +29,65 @@
         <!--hide elements until the map load is successful-->
         <div style="display: none;" data-bind="visible: true">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 hidden-xs">
                     <input placeholder="Search..." data-bind="value: filter, valueUpdate: 'afterkeydown'" />
                 </div>
-                <div class="col-md-8">
-                    <div id="category-list" data-bind="foreach: categoryList">
+            </div>
+            <div class="row hidden-sm hidden-md hidden-lg hidden-xl search-bar">
+                <img src="images/ex-ns-mobile.png" style="height: 50px;"/>
+                <input placeholder="Search..." data-bind="value: filter, valueUpdate: 'afterkeydown'" />
+                <button class="reset-search-button btn" data-bind="click: resetSearch, css: { show: searching() === true }">
+                     Reset Search
+                </button>
+            </div>
+            <div class="row hidden-xs">
+                <!-- TODO: Would like to see if I can "replace" buttons so they all align on the left -->
+                <div class="col-md-1">
+                    <button class="hide-list-button btn" data-bind="click: hideList, css: { hide: hidden() === true }">
+                        Hide List
+                    </button>
+                </div>
+                <div class="col-md-1">
+                    <button class="show-list-button btn" data-bind="click: showList, css: { show: hidden() === true }">
+                        Show List
+                    </button>
+                </div>
+                <div class="col-md-1">
+                    <button class="reset-search-button btn" data-bind="click: resetSearch, css: { show: searching() === true }">
+                        Reset Search
+                    </button>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-8 text-center category-container hidden-xs add-padding">
+                    <div id="category-list-lg" data-bind="foreach: categoryList">
                         <img class="category-marker" src="" alt="Marker Picture" data-bind="attr: {src: markerURL}, click: $parent.filterByCategory">
-                        <!--TODO: Enhancement-don't show the words when on mobile -->
                         <span class="category" data-bind="text: category, click: $parent.filterByCategory"></span>
                     </div>
                 </div>
-
-            </div>
-            <div class="row">
-                <!-- TODO: Would like to see if I can "replace" buttons so they all align on the left -->
-                <div class="col-md-1">
-                        <button class="hide-list-button btn" data-bind="click: hideList, css: { hide: hidden() === true }">
-                            Hide List
-                        </button>
-                    </div>
-                    <div class="col-md-1">
-                        <button class="show-list-button btn" data-bind="click: showList, css: { show: hidden() === true }">
-                            Show List
-                        </button>
-                    </div>
-                    <div class="col-md-1">
-                        <button class="reset-search-button btn" data-bind="click: resetSearch, css: { show: searching() === true }">
-                            Reset Search
-                        </button>
-                </div>
+        </div>
+        <div class="row hidden-sm hidden-md hidden-lg hidden-xl">
+                <div id="category-list-xs" data-bind="foreach: categoryList">
+                    <img class="category-marker" src="" alt="Marker Picture" data-bind="attr: {src: markerURL}, click: $parent.filterByCategory" />
+                    <span class="category" data-bind="text: category, click: $parent.filterByCategory"></span>
             </div>
         </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <!--hide these elements while map is loading-->
-                    <div style="display: none;" data-bind="visible: true">
-                        <div class="list-hidden add-padding" data-bind="css: { hide: hidden() ===  false }">
-                            Click the Show List button to see the list.
-                        </div>
-                    <div id="location-list" data-bind="foreach: filteredItems, css: { hide: hidden() === true }">
-                        <div class="location-item" data-bind="click: $parent.selectLocation">
-                            <h5 class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress"></h5>
+        <div class="row">
+            <div class="col-md-4">
+                <!--hide these elements while map is loading-->
+                <div style="display: none;" data-bind="visible: true">
+                    <div class="list-hidden add-padding" data-bind="css: { hide: hidden() ===  false }">
+                        Click the Show List button to see the list.
+                    </div>
+                    <div id="location-list-lg" class="hidden-xs" data-bind="foreach: filteredItems, css: { hide: hidden() === true }">
+                        <div class="location-item-lg" data-bind="click: $parent.selectLocation">
+                            <h5 class="location-address-lg" data-bind="click: $parent.selectLocation, text: fullAddress"></h5>
                         </div>
                         <hr>
+                    </div>
+                    <div class="add-padding hidden-sm hidden-md hidden-lg hidden-xl">
+                        <select id="location-list-sm" class="add-padding" data-bind="options: filteredItems, optionsText: 'fullAddress', value: selectedChoice, optionsCaption: 'Click to select location', css: { hide: hidden() === true }">
+                        </select>
                     </div>
                     <div data-bind="with: currentLocation">
                         <div id="location">
@@ -83,9 +99,12 @@
                             </h4>
                             <div class="add-extra-padding-sides">
                                 <img class="single-pic add-padding" src="" alt="Location Picture" data-bind="attr: {src: imgSrc}">
+                                <span class="text-center hidden-sm hidden-md hidden-lg hidden-xl">
+                                    <button class="btn add-padding" data-bind="click: $parent.showList">Hide Detail</button>
+                                </span>
                             </div>
                             <div class="single-comment add-padding" data-bind="text: comment"></div>
-                            <div class="text-center">
+                            <div class="text-center hidden-xs">
                                 <button class="btn add-padding" data-bind="click: $parent.showList">Show List</button>
                             </div>
                         </div>
@@ -106,9 +125,9 @@
                         </button>
                     </div>
                 </div>
-            </div> <!--col div-->
-        </div> <!--row div-->
-    </div> <!--container div-->
+            </div>
+        </div>
+    </div>
 
         <script type="text/javascript" src="js/data.js"></script>
         <script type="text/javascript" src="js/helpers.js"></script>

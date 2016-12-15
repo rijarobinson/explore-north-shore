@@ -52,6 +52,6 @@ var styleInfoWinB = "</div></div></div><div class='row'>" +
 var styleInfoWinC = "' style='max-width: 75px; min-width: 75px;'></div>" +
                     "<div class='col-md-2'></div>" +
                     "<div class='col-md-8 pad-top'>";
-var styleInfoWinD = "</div></div><div class='row'><div class='col-md-12'>" +
+var styleInfoWinD = "</div></div><div class='row'><div class='col-md-12 hidden-xs'>" +
                     "<div class='add-padding'>";
 var styleInfoWinE = "</div></div></div></div>";
