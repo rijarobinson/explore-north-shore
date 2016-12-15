@@ -14,7 +14,7 @@ h6 {
 
 hr {
     padding: 0px;
-    margin: 5px;
+    margin: 0px;
 }
 
 #map {
@@ -25,6 +25,15 @@ hr {
 
 #location-list {
     padding: 0px;
+}
+
+.location-item {
+    padding: 3px;
+}
+
+.location-item:hover {
+    background-color: #FCF;
+    border-radius: 5px;
 }
 
 .single-pic {

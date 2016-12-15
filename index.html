@@ -68,7 +68,9 @@
                             Click the Show List button to see the list.
                         </div>
                     <div id="location-list" data-bind="foreach: filteredItems, css: { hide: hidden() === true }">
-                        <h5 class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress"></h5>
+                        <div class="location-item">
+                            <h5 class="location-address" data-bind="click: $parent.selectLocation, text: fullAddress"></h5>
+                        </div>
                         <hr>
                     </div>
                     <div data-bind="with: currentLocation">
