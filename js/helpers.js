@@ -5,9 +5,9 @@ function otherError() {
 function errorAlert() {
     /* Using jquery here because this only appears in the
         event knockout components can't be loaded*/
-  $("#map").children("h2").text("Error loading map. Check your internet " +
+    $("#map").children("h2").text("Error loading map. Check your internet " +
                                 "connection or speak to the website owner.");
-  $("#error").text("Error loading site. Check your internet " +
+    $(".error").text("Error loading site. Check your internet " +
                                 "connection or speak to the website owner.");
 }
 

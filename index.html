@@ -25,7 +25,7 @@
                     </h5>
                 </div>
             </div>
-            <h2 id="error"></h2>
+            <span class="error"></span>
         <!--hide elements until the map load is successful-->
         <div style="display: none;" data-bind="visible: true">
             <div class="row">
@@ -60,9 +60,11 @@
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-8 text-center category-container hidden-xs add-padding">
+                    <div class="row">
                     <div id="category-list-lg" data-bind="foreach: categoryList">
                         <img class="category-marker" src="" alt="Marker Picture" data-bind="attr: {src: markerURL}, click: $parent.filterByCategory">
                         <span class="category" data-bind="text: category, click: $parent.filterByCategory"></span>
+                    </div>
                     </div>
                 </div>
         </div>

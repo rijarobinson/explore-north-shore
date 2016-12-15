@@ -102,6 +102,7 @@ var ViewModel = function() {
     }
 
     self.selectedChoice.subscribe(function(theLocation) {
+        self.hidden(true);
         google.maps.event.trigger(theLocation.marker,"click");
         self.currentLocation(theLocation);
     });
