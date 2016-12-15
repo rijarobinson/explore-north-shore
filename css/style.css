@@ -27,22 +27,44 @@ hr {
     padding: 0px;
 }
 
-.location-picture {
-    height: 50px;
-    display: none;
-}
-
 .single-pic {
     height: 100px;
+    border: 3px solid #60C;
+    border-radius: 20px;
 }
 
 .add-padding {
     padding: 5px;
 }
 
+.add-extra-padding-sides {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.category:hover {
+    color: #60C;
+    font-weight: bold;
+}
+
+.category-marker:hover {
+    background-color: #FCF;
+    border-radius: 5px;
+}
+
+.btn {
+    display: inline;
+}
+
+.btn:hover {
+    color: #FCF;
+    display: inline;
+}
+
 button {
     background-color: #60C;
     color: #FFF;
+    display: inline;
 }
 
 .show-list-button {

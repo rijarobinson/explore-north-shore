@@ -25,34 +25,38 @@
                     </h6>
                 </div>
             </div>
+            <h2 id="error"></h2>
         <!--hide elements until the map load is successful-->
         <div style="display: none;" data-bind="visible: true">
             <div class="row">
                 <div class="col-md-4">
                     <input placeholder="Search..." data-bind="value: filter, valueUpdate: 'afterkeydown'" />
-                    <!--TODO: maybe a categories dropdown here?-->
-                        <div class="add-padding">
-                            <button class="hide-list-button btn" data-bind="click: hideList, css: { hide: hidden() === true }">
-                                Hide List
-                            </button>
-                            <button class="show-list-button btn" data-bind="click: showList, css: { show: hidden() === true }">
-                                Show List
-                            </button>
-                            <button class="reset-search-button btn" data-bind="click: resetSearch, css: { show: searching() === true }">
-                                Reset Search
-                            </button>
-                        </div>
                 </div>
                 <div class="col-md-8">
                     <div id="category-list" data-bind="foreach: categoryList">
-                        <div class="col-md-4">
-                            <div class="add-padding">
-                                <!--TODO: enhancement-make these clickable to filter-->
-                                <img class="category-marker" src="" alt="Marker Picture" data-bind="attr: {src: markerURL}, click: $parent.filterByCategory">
-                                <span class="category" data-bind="text: category, click: $parent.filterByCategory"></span>
-                            </div>
-                        </div>
+                        <img class="category-marker" src="" alt="Marker Picture" data-bind="attr: {src: markerURL}, click: $parent.filterByCategory">
+                        <!--TODO: Enhancement-don't show the words when on mobile -->
+                        <span class="category" data-bind="text: category, click: $parent.filterByCategory"></span>
                     </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <!-- TODO: Would like to see if I can "replace" buttons so they all align on the left -->
+                <div class="col-md-1">
+                        <button class="hide-list-button btn" data-bind="click: hideList, css: { hide: hidden() === true }">
+                            Hide List
+                        </button>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="show-list-button btn" data-bind="click: showList, css: { show: hidden() === true }">
+                            Show List
+                        </button>
+                    </div>
+                    <div class="col-md-1">
+                        <button class="reset-search-button btn" data-bind="click: resetSearch, css: { show: searching() === true }">
+                            Reset Search
+                        </button>
                 </div>
             </div>
         </div>
@@ -60,7 +64,7 @@
                 <div class="col-md-4">
                     <!--hide these elements while map is loading-->
                     <div style="display: none;" data-bind="visible: true">
-                        <div class="list-hidden" data-bind="css: { hide: hidden() ===  false }">
+                        <div class="list-hidden add-padding" data-bind="css: { hide: hidden() ===  false }">
                             Click the Show List button to see the list.
                         </div>
                     <div id="location-list" data-bind="foreach: filteredItems, css: { hide: hidden() === true }">
@@ -75,18 +79,21 @@
                             <h4>
                                 <span data-bind="text: streetAddress"></span>, <span data-bind="text: city"></span>
                             </h4>
-                            <img class="single-pic" src="" alt="Location Picture" data-bind="attr: {src: imgSrc}">
-                            <div data-bind="text: comment"></div>
-                            <button class="btn" data-bind="click: $parent.showList">Show List</button>
+                            <div class="add-extra-padding-sides">
+                                <img class="single-pic add-padding" src="" alt="Location Picture" data-bind="attr: {src: imgSrc}">
+                            </div>
+                            <div class="single-comment add-padding" data-bind="text: comment"></div>
+                            <div class="text-center">
+                                <button class="btn add-padding" data-bind="click: $parent.showList">Show List</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
-                <!--border-radius: 20px; border: 2px; border-color: #60C;-->
                 <div id="map">
                     <h2>
-                        Site loading...
+                        Map loading...
                     </h2>
                 </div>
                 <!--hide the button while map is loading-->
@@ -105,9 +112,9 @@
         <script type="text/javascript" src="js/helpers.js"></script>
         <script src="js/lib/jquery-3.1.1.min.js" onerror="otherError()" type="text/javascript"></script>
         <script src="https://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js" onerror="otherError()"></script>
-        <script type="text/javascript" src="js/lib/knockout-3.4.1.js" onerror="otherError()"></script>
-        <script type="text/javascript" src="js/app.js" onerror="otherError()"></script>
-        <script type="text/javascript" src="js/map_v3.js" onerror="otherError()"></script>
+        <script type="text/javascript" src="js/lib/knockout-3.4.1.js" onerror="errorAlert()"></script>
+        <script type="text/javascript" src="js/app.js" onerror="errorAlert()"></script>
+        <script type="text/javascript" src="js/map_v3.js" onerror="errorAlert()"></script>
         <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDVId7-jJjGL6LwbveKl60DqYi4GEubgs&v=3.exp&callback=initialize " onerror="errorAlert()"></script>
     </body>
