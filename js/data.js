@@ -109,7 +109,7 @@ var locations = [
     streetAddress: "1107 Central Ave",
     city: "Deerfield",
     state: "IL",
-    comment: "Great park. Lots of places to sit and watch your child."
+    comment: "Great park. Lots of places to sit and watch your child.",
     imgSrc: "images/jewett.jpg",
     category: "Entertainment",
     latLon: {lat: 42.169163, lng: -87.848874},
