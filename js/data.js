@@ -100,7 +100,7 @@ var locations = [
              "You'll need to find parking offsite or know someone with a city sticker!",
     imgSrc: "images/rosewood.jpg",
     category: "Public",
-    latLon: {lat: 42.165054, lng: -87.793035},
+    latLon: {lat: 42.167627, lng: -87.770139},
     fSId: "4bd2fb96046076b024e17471",
     description: ""
     },
@@ -111,7 +111,7 @@ var locations = [
     state: "IL",
     comment: "Great park. Lots of places to sit and watch your child.",
     imgSrc: "images/jewett.jpg",
-    category: "Entertainment",
+    category: "Kids",
     latLon: {lat: 42.169163, lng: -87.848874},
     fSId: "4b085c45f964a5200a0a23e3",
     description: ""
@@ -129,6 +129,8 @@ var categories = [
     markerURL: urlStart + "006666"},
     {category: "Entertainment",
     markerURL: urlStart + "cc33ff"},
+    {category: "Kids",
+    markerURL: urlStart + "4286f4"}
     {category: "Public",
     markerURL: urlStart + "ffccff"},
     {category: "Shopping",
