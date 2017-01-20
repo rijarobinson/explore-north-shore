@@ -99,7 +99,7 @@ var locations = [
     comment: "Beautifully renovated beach in Highland Park. " +
              "You'll need to find parking offsite or know someone with a city sticker!",
     imgSrc: "images/rosewood.jpg",
-    category: "Recreation",
+    category: "Public",
     latLon: {lat: 42.165054, lng: -87.793035},
     fSId: "4bd2fb96046076b024e17471",
     description: ""
@@ -111,7 +111,7 @@ var locations = [
     state: "IL",
     comment: "Great park. Lots of places to sit and watch your child."
     imgSrc: "images/jewett.jpg",
-    category: "Kids",
+    category: "Entertainment",
     latLon: {lat: 42.169163, lng: -87.848874},
     fSId: "4b085c45f964a5200a0a23e3",
     description: ""
