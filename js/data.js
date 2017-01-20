@@ -130,7 +130,7 @@ var categories = [
     {category: "Entertainment",
     markerURL: urlStart + "cc33ff"},
     {category: "Kids",
-    markerURL: urlStart + "4286f4"}
+    markerURL: urlStart + "4286f4"},
     {category: "Public",
     markerURL: urlStart + "ffccff"},
     {category: "Shopping",
