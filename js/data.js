@@ -104,6 +104,18 @@ var locations = [
     fSId: "4bd2fb96046076b024e17471",
     description: ""
     },
+    {
+    locationName: "Jewett Park",
+    streetAddress: "1107 Central Ave",
+    city: "Deerfield",
+    state: "IL",
+    comment: "Great park. Lots of places to sit and watch your child."
+    imgSrc: "images/jewett.jpg",
+    category: "Entertainment",
+    latLon: {lat: 42.169163, lng: -87.848874},
+    fSId: "4b085c45f964a5200a0a23e3",
+    description: ""
+    },
 ];
 
 var urlStart = "https://chart.apis.google.com/chart?" +
