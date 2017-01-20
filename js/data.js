@@ -91,6 +91,31 @@ var locations = [
     fSId: "4fe6587fe4b0af2e67710fc6",
     description: ""
     },
+    {
+    locationName: "Rosewood Beach",
+    streetAddress: "45 Roger Williams Ave",
+    city: "Highland Park",
+    state: "IL",
+    comment: "Beautifully renovated beach in Highland Park. " +
+             "You'll need to find parking offsite or know someone with a city sticker!",
+    imgSrc: "images/rosewood.jpg",
+    category: "Recreation",
+    latLon: {lat: 42.165054, lng: -87.793035},
+    fSId: "4bd2fb96046076b024e17471",
+    description: ""
+    },
+    {
+    locationName: "Jewett Park",
+    streetAddress: "1107 Central Ave",
+    city: "Deerfield",
+    state: "IL",
+    comment: "Great park. Lots of places to sit and watch your child."
+    imgSrc: "images/jewett.jpg",
+    category: "Kids",
+    latLon: {lat: 42.169163, lng: -87.848874},
+    fSId: "4b085c45f964a5200a0a23e3",
+    description: ""
+    },
 ];
 
 var urlStart = "https://chart.apis.google.com/chart?" +
