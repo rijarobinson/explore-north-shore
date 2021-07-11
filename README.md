@@ -1,9 +1,9 @@
-#Explore North Shore (Udacity Neighborhood Map Project)
-###(In fullfillment of Udacity's Full Stack Developer Program)
+# Explore North Shore (Udacity Neighborhood Map Project)
+### (In fullfillment of Udacity's Full Stack Developer Program)
 
 Explore North Shore was developed as part of Udacity's Full Stack Developer Nanodegree. It contains the code for a system designed to share information on favorite haunts on Chicago's North Shore sites. The purpose of this project was to develop a site and functions that would pass the requirements of the Neighborhood Map project.
 
-##Table of Contents
+## Table of Contents
  * [Functionality](#functionality)
  * [Structure Overview](#structure-overview)
  * [Technologies](#technologies)
@@ -12,14 +12,14 @@ Explore North Shore was developed as part of Udacity's Full Stack Developer Nano
  * [Using the Software](#using-software)
 
 <a id="functionality"></a>
-##Functionality
+## Functionality
 The *Explore North Shore* app is a responsive site that contains functionality for browsing pre-defined locations using the Google Maps API and FOURSQUARE data. No login is necessary for users to access. Users can filter the locations using a text search box that filters on the name and address of the location. They can also filter by the listed categories by clicking a category name or marker in the list. Locations are displayed on the map, and markers are filtered along with text data. A user can click on a location to see location details and have the marker highlighted on the map. They can also click on the marker to see the data. Tips from FOURSQUARE and a link to the FOURSQUARE listing (if available) appear on the map marker infowindow. Users may reset the map markers and filters at any time.
 <a id="structure-overview"></a>
-##Structure Overview
+## Structure Overview
 
 Data is located in the **js/data.js** file.
 <a id="technologies"></a>
-##Technologies
+## Technologies
 
 | Tool Used  | Purpose                                      | Notes                                     | About         |
 | ---------- | -------------------------------------------- | ----------------------------------------- | ------------- |
@@ -37,7 +37,7 @@ Data is located in the **js/data.js** file.
 | JSON      | Data Interchange Format                       | App utilizes JSON datasets                | [More info](http://www.json.org/) |
 
 <a id="folders-files"></a>
-##Folders & Files
+## Folders & Files
 
 | File/Folder      | Purpose                             |
 | ---------------- | ----------------------------------- |
@@ -50,7 +50,7 @@ Data is located in the **js/data.js** file.
 | css/styles.css   | CSS file with styles                |
 
 <a id="libraries-modules"></a>
-##Libraries & Modules
+## Libraries & Modules
 | Library or Module | Purpose                                                        |
 | ----------------- | -------------------------------------------------------------- |
 | Bootstrap         | Framework for responsive design               |
@@ -59,7 +59,7 @@ Data is located in the **js/data.js** file.
 | Knockout          |        |
 
 <a id="using-software"></a>
-##Using the Site
+## Using the Site
 
 **To run the site**, place all files in the same folder, open index.html in a web browser.
 
